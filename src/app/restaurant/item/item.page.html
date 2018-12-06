@@ -1,0 +1,41 @@
+<ion-content fullscreen>
+	<div class="header-buttons">
+		<ion-anchor href="/restaurant"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+	</div>
+	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<div class="content">
+		<div class="item-title">
+			<div class="page-header">Brie, Nozes e Mel</div>
+			<div class="item-price">R$32,90</div>
+		</div>
+		<p class="item-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+		<p class="item-sub-title"><b>Adicionais</b></p>
+		<ion-list class="list-itens" lines="none">
+			<ion-item no-padding>
+				<ion-checkbox slot="start" color="success"></ion-checkbox>
+				<ion-label>Borda recheada</ion-label>
+				<ion-note slot="end">+R$5,90</ion-note>
+			</ion-item>
+			<ion-item no-padding>
+				<ion-checkbox slot="start" color="success"></ion-checkbox>
+				<ion-label>Queijo em dobro</ion-label>
+				<ion-note slot="end">+R$5,90</ion-note>
+			</ion-item>
+		</ion-list>
+		<p class="item-sub-title"><b>Observações</b></p>
+		<ion-textarea placeholder="Deseja fazer alguma observação?"></ion-textarea>
+		<div class="add-item">
+			<div class="component-quantity">
+				<div class="minus"><ion-icon name="f-minus"></ion-icon></div>
+				<div class="number">1</div>
+				<div class="plus"><ion-icon name="f-plus"></ion-icon></div>
+			</div>
+			<ion-button color="primary" shape="round" fill="outline" size="small">Adicionar</ion-button>
+		</div>
+		<div class="footer-buttons">
+			<ion-button href="/restaurant" color="medium">Continuar Pedindo</ion-button>
+			<ion-button href="/order-end" color="primary">Finalizar Pedido</ion-button>
+		</div>
+	</div>
+</ion-content>

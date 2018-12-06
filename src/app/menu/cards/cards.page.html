@@ -1,0 +1,27 @@
+<ion-header no-border>
+	<ion-toolbar transparent>
+        <ion-title>Meus cartões</ion-title>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding fullscreen>
+    <ion-list class="card-list">
+        <ion-item no-padding>
+            <ion-label>
+                <span class="value">Número do Cartão</span>
+                <span class="desc">****.****.****.8989</span>
+                <span class="value">Tipo do Cartão</span>
+                <span class="desc">Cartão de Crédito</span>
+                <span class="value">Vencimento</span>
+                <span class="desc">12/2020</span>
+            </ion-label>
+            <ion-icon slot="start" src="assets/images/mastercard.svg"></ion-icon>
+            <ion-button (click)="edit()" fill="clear"><ion-icon slot="end" src="assets/feather/edit-2.svg" color="dark"></ion-icon></ion-button>
+            <ion-button (click)="remove()" fill="clear"><ion-icon slot="end" src="assets/feather/trash-2.svg" color="danger"></ion-icon></ion-button>
+        </ion-item>
+    </ion-list>
+    <ion-button color="medium" fill="clear" (click)="edit()">Cadastrar novo cartão</ion-button>
+</ion-content>

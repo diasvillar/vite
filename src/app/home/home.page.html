@@ -1,10 +1,17 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+	<div class="page-header">Resturantes</div>
+	<ion-list class="list-restaurants" lines="none">
+		<ion-anchor no-padding *ngFor="let restaurante of restaurantes" (click)="seleciona(restaurante)">
+			<div class="restaurant">
+				<img src="{{ restaurante.imgurl }}" class="image">
+				<div class="restaurant-content">
+					<div class="info">
+						<div class="name">{{restaurante.nome}}</div>
+						<div class="address">{{restaurante.endereco}}</div>
+					</div>
+					<div class="price">$$$</div>
+				</div>
+			</div>
+		</ion-anchor>
+	</ion-list>
 </ion-content>

@@ -1,0 +1,21 @@
+<ion-content padding>
+	<div class="access-content">
+		<img src="assets/images/logo_verde.png">
+		<div>
+			<p class="access-header-message">Bem-vindo a uma nova experiência</p>
+			<div class="custom-form-access" margin-bottom>
+				<ion-input type="email" [(ngModel)]="usuario.email" name="email" placeholder="E-mail" required></ion-input>
+				<ion-input type="password" [(ngModel)]="usuario.password" name="password" placeholder="Senha" required></ion-input>
+			</div>
+			<ion-button (click)="submit()" color="primary" expand="block" shape="round">Entrar</ion-button>
+			<div class="button-divisor"><span>ou</span></div>
+			<ion-button color="secondary" class="gradient" expand="block" shape="round">Entrar com Facebook</ion-button>
+		</div>
+		<div>
+			<ion-anchor href="/signup" class="access-bottom-text">
+				Ainda não possui conta?<br>
+				<b>Crie agora mesmo!</b>
+			</ion-anchor>
+		</div>
+	</div>
+</ion-content>

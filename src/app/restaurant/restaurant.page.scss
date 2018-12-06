@@ -1,0 +1,48 @@
+.item-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.item-button {
+		color: var(--ion-color-medium);
+		font-size: 25px;
+	}
+}
+
+.item-list {
+	ion-item {
+		--inner-padding-end: 0px;
+		.info {
+			width: 100%;
+			padding-bottom: 1rem;
+			display: flex;
+			justify-content: space-between;
+			.thumb {
+				background: var(--ion-color-medium-tint);
+				min-width: 60px;
+				height: 60px;
+				display: flex;
+				border-radius: 5px;
+			}
+			.item-content {
+				width: calc(100% - 50px);
+				margin-left: 1rem;
+				font-size: 14px;
+				.title {
+					color: var(--ion-color-dark);
+					font-size: 16px;
+					font-weight: bold;
+					margin-bottom: 0.1rem;
+				}
+				.price {
+					color: var(--ion-color-primary);
+					font-size: 16px;
+					margin-bottom: 0.5rem;
+				}
+				.desc {
+					color: var(--ion-color-dark-tint);
+					margin-bottom: 0.4rem;
+				}
+			}
+		}
+	}
+}

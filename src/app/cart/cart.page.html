@@ -1,0 +1,23 @@
+<ion-content padding>
+	<div class="page-header">Carrinho</div>
+	<div class="empty" *ngIf="cart.length == 0">Nenhum item no carrinho</div>
+	<div class="cart" *ngIf="cart.length > 0">
+		<div class="itens">
+			<div *ngFor="let i of cart" class="item">
+				<div class="info">
+					<div class="description">1x Pizza - Brie, Nozes e Mel</div>
+					<div class="price">R$32,90</div>
+				</div>
+				<div class="quantity">
+					<div class="minus">-</div>
+					<div class="number">1</div>
+					<div class="plus">+</div>
+				</div>
+			</div>
+			<div class="total">
+				Valor total<br>
+				<span class="price">R$ 72,80</span>
+			</div>
+		</div>
+	</div>
+</ion-content>

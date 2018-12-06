@@ -1,0 +1,39 @@
+<ion-header no-border>
+	<ion-toolbar transparent>
+		<ion-title>Configuração</ion-title>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/tabs/(menu:menu)"></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding fullscreen>
+	<img [src]="'assets/images/avatar.png'" class="avatar">
+	<ion-item no-padding>
+		<ion-label position="floating">Nome</ion-label>
+		<ion-input type="text"></ion-input>
+	</ion-item>
+	<ion-item no-padding>
+		<ion-label position="floating">Telefone</ion-label>
+		<ion-input type="tel"></ion-input>
+	</ion-item>
+	<ion-item no-padding>
+		<ion-label position="floating">E-mail</ion-label>
+		<ion-input type="email"></ion-input>
+	</ion-item>
+	<ion-item no-padding>
+		<ion-label position="floating">Senha</ion-label>
+		<ion-input type="password"></ion-input>
+	</ion-item>
+	<ion-list lines="none">
+		<ion-item no-padding>
+			<ion-label>Ativar notificações?</ion-label>
+			<ion-toggle slot="end" color="primary" checked></ion-toggle>
+		</ion-item>
+	</ion-list>
+	<ion-button color="medium" fill="clear">Limpar histórico de buscas</ion-button>
+</ion-content>
+
+<ion-footer no-border>
+	<ion-button color="primary" expand="full">Salvar</ion-button>
+</ion-footer>

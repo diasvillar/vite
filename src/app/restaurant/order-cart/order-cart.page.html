@@ -1,0 +1,48 @@
+<ion-content fullscreen>
+	<div class="header-buttons">
+		<ion-anchor href="/restaurant"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<a></a>
+	</div>
+	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<div class="content">
+		<div class="page-header">Carrinho</div>
+		
+		<ion-list lines="none" class="item-list">
+			<ion-item no-padding>
+				<div class="info">
+					1x Pizza - Brie, Nozes e Mel
+					<div class="price">R$32,90</div>
+				</div>
+				<div slot="end">
+					<div class="component-quantity">
+						<div class="minus"><ion-icon name="f-minus"></ion-icon></div>
+						<div class="number">1</div>
+						<div class="plus"><ion-icon name="f-plus"></ion-icon></div>
+					</div>
+				</div>
+			</ion-item>
+			<ion-item no-padding>
+				<div class="info">
+					1x Pizza - Jámon, Rúcula e Feta
+					<div class="price">R$32,90</div>
+				</div>
+				<div slot="end">
+					<div class="component-quantity">
+						<div class="minus"><ion-icon name="f-minus"></ion-icon></div>
+						<div class="number">1</div>
+						<div class="plus"><ion-icon name="f-plus"></ion-icon></div>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+		<div class="total">
+			Valor total<br>
+			<span class="price">R$ 72,80</span>
+		</div>
+
+		<div class="footer-buttons">
+			<ion-button color="medium">Limpar Carrinho</ion-button>
+			<ion-button href="/order-end" color="primary">Finalizar Pedido</ion-button>
+		</div>
+	</div>
+</ion-content>

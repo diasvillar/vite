@@ -1,0 +1,27 @@
+<ion-header no-border>
+	<ion-toolbar transparent>
+		<ion-title>Histórico de Pedidos</ion-title>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/tabs/(menu:menu)"></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding fullscreen>
+	<ion-list class="history-list">
+		<ion-item button no-padding (click)="details()">
+			<div class="info">
+				<div class="date">
+					<span class="day">12</span>
+					<span>OUT</span>
+				</div>
+				<div class="history-content">
+					<div class="title">Comp Snack Bar</div>
+					<div class="item">1x Pizza - Brie, Nozes e Mel</div>
+					<div class="value">Valor total</div>
+					<div class="price">R$72,80</div>
+				</div>
+			</div>
+		</ion-item>
+	</ion-list>
+</ion-content>

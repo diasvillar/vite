@@ -1,0 +1,55 @@
+<ion-content fullscreen>
+	<div class="header-buttons">
+		<ion-anchor href="/restaurant"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+	</div>
+	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<div class="content">
+		<div class="page-header">Finalizar Pedido</div>
+		
+		<ion-list class="list-itens" lines="none">
+			<ion-item no-padding>
+				<ion-label>1x Pizza - Brie, Nozes e Mel</ion-label>
+				<ion-note slot="end">R$32,90</ion-note>
+			</ion-item>
+			<ion-item no-padding>
+				<ion-label>1x Pizza - Jámon, Rúcula e Feta</ion-label>
+				<ion-note slot="end">R$39,90</ion-note>
+			</ion-item>
+		</ion-list>
+		<ion-list class="list-toppings" lines="none">
+			<ion-item no-padding>
+				<ion-radio slot="start" color="success"></ion-radio>
+				<ion-label>Consumir no Local</ion-label>
+				<ion-note slot="end" class="total">Valor Total</ion-note>
+			</ion-item>
+			<ion-item no-padding>
+				<ion-radio slot="start" color="success"></ion-radio>
+				<ion-label>Pedido para Viagem</ion-label>
+				<ion-note slot="end" class="price">R$72,80</ion-note>
+			</ion-item>
+		</ion-list>
+		
+		<div class="delivery-time">
+			<ion-icon name="f-clock"></ion-icon>
+			<div>
+				Informe o horário de retirada<br> para deixarmos tudo pronto para você.
+			</div>
+		</div>
+		<div class="input-time">
+			<ion-datetime
+			display-format="DD/MMM HH:mm"
+			picker-format="DD/MMM HH:mm"
+			month-short-names="JAN, FEV, MAR, ABR, MAI, JUN, JUL, AGO, SET, OUT, NOV, DEZ"
+			placeholder="Data/hora para Retirada"
+			minuteValues="0,10,20,30,40,50"
+			cancel-text="Cancelar"
+			done-text="OK"
+			></ion-datetime>
+		</div>
+		<div class="footer-buttons">
+			<ion-button href="/restaurant" color="medium">Continuar Pedindo</ion-button>
+			<ion-button href="/cards-list" color="primary">Finalizar Pedido</ion-button>
+		</div>
+	</div>
+</ion-content>

@@ -1,0 +1,13 @@
+.empty {
+	color: var(--ion-color-light-shade );
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 23px;
+}
+.total {
+	font-size: 15px;
+	.price {
+		color: var(--ion-color-primary);
+		font-size: 20px;
+	}
+}

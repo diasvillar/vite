@@ -1,0 +1,18 @@
+<ion-content padding>
+	<div class="page-header">Pesquisar</div>
+	<ion-input placeholder="Buscar" (ionInput)="search($event.target.value)" class="search"></ion-input>
+	<ion-list class="list-restaurants" lines="none">
+		<ion-anchor no-padding *ngFor="let r of restaurants" href="/restaurant">
+			<div class="restaurant">
+				<img src="assets/images/restaurant.png" class="image">
+				<div class="restaurant-content">
+					<div class="info">
+						<div class="name">Antepasto</div>
+						<div class="address">Rua Marques do Pombal, 293.</div>
+					</div>
+					<div class="price">$$$</div>
+				</div>
+			</div>
+		</ion-anchor>
+	</ion-list>
+</ion-content>

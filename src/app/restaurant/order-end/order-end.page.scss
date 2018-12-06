@@ -1,0 +1,61 @@
+.list-itens {
+	padding: 0px;
+	margin-bottom: 2rem;
+	ion-item {
+		--inner-padding-end: 0px;
+		--color: var(--ion-color-dark);
+		--min-height: unset;
+		height: 30px;
+		ion-note {
+			font-size: 15px;
+		    padding: 0.8rem 0px 0px 0px;
+		}
+	}
+}
+
+.list-toppings {
+	padding: 0px;
+	padding-bottom: 0.5rem;
+	ion-item {
+		--inner-padding-end: 0px;
+		--color: var(--ion-color-medium);
+		--min-height: unset;
+		height: 30px;
+		ion-radio {
+			--border-color: var(--ion-color-medium);
+			--border-width: 1.5px;
+			margin: 0px 0.6rem 0px 0px;
+		}
+		ion-note {
+			font-size: 15px;
+			padding: 0.8rem 0px 0px 0px;
+			&.total {
+				color: var(--ion-color-dark);
+				--font-size: 14px !important;
+			}
+			&.price {
+				color: var(--ion-color-primary);
+				--font-size: 18px !important;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+.delivery-time {
+	display: flex;
+	justify-content: start;
+	color: var(--ion-color-dark);
+	margin-top: 1.5rem;
+	font-size: 14px;
+	ion-icon {
+		font-size: 35px;
+		margin-right: 1rem;
+	}
+}
+
+.input-time {
+    width: 60%;
+    text-align: center;
+    margin: 1rem auto 0px auto;
+}

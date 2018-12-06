@@ -1,0 +1,272 @@
+<ion-content fullscreen>
+	<div class="header-buttons">
+		<ion-anchor href="/tabs"><ion-icon src="assets/images/x-icon.svg"></ion-icon></ion-anchor>
+		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+	</div>
+	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<div class="content">
+		<div class="item-title">
+			<div class="page-header">{{restaurante.nome}}</div>
+			<ion-anchor href="/about" class="item-button">
+				<ion-icon name="f-info"></ion-icon>
+			</ion-anchor>
+		</div>
+		<div class="page-sub-header">{{restaurante.endereco}}</div>
+		<ion-input placeholder="Buscar"></ion-input>
+		<div class="categories">
+			<ion-segment ([ngModel])="segment">
+				<ion-segment-button value="Bebidas" (click)="selectedBebidas()">
+					Bebidas
+				</ion-segment-button>
+				<ion-segment-button value="Cafés" (click)="selectedCafes()">
+					Cafés
+				</ion-segment-button>
+				<ion-segment-button value="Cafés Da Manhã" (click)="selectedCafesDaManha()">
+					Cafés Da Manhã
+				</ion-segment-button>
+				<ion-segment-button value="Chocolates" (click)="selectedChocolates()">
+					Chocolates
+				</ion-segment-button>
+				<ion-segment-button value="Coquetéis" (click)="selectedCoqueteis()">
+					Coquetéis
+				</ion-segment-button>
+				<ion-segment-button value="Doces" (click)="selectedDoces()">
+					Doces
+				</ion-segment-button>
+				<ion-segment-button value="Espressos" (click)="selectedEspressos()">
+					Espressos
+				</ion-segment-button>
+				<ion-segment-button value="Petiscos" (click)="selectedPetiscos()">
+					Petiscos
+				</ion-segment-button>
+				<ion-segment-button value="Pratos" (click)="selectedPratos()">
+					Pratos
+				</ion-segment-button>
+				<ion-segment-button value="Salgados" (click)="selectedSalgados()">
+					Salgados
+				</ion-segment-button>
+				<ion-segment-button value="Sanduíches" (click)="selectedSanduiches()">
+					Sanduíches
+				</ion-segment-button>
+				<ion-segment-button value="Shakes" (click)="selectedShakes()">
+					Shakes
+				</ion-segment-button>
+				<ion-segment-button value="Smoothies" (click)="selectedSmoothies()">
+					Smoothies
+				</ion-segment-button>
+			</ion-segment>
+		</div>
+		<div *ngFor="let cardapioGeral of cardapiosGeral">
+			<div *ngIf="segment === 'Smoothies' && cardapioGeral.categoria === 'Smoothies'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+		
+			<div *ngIf="segment === 'Shakes' && (cardapioGeral.categoria === 'Shake sem Café' || cardapioGeral.categoria === 'Shake com Café')">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Sanduíches' && cardapioGeral.categoria === 'Sanduíches'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Salgados' && cardapioGeral.categoria === 'Salgados'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Pratos' && (cardapioGeral.categoria === 'Prato' || cardapioGeral.categoria === 'Salada')">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Petiscos' && cardapioGeral.categoria === 'Petiscos'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Espressos' && (cardapioGeral.categoria === 'Espresso' || cardapioGeral.categoria === 'Bebida com Espresso')">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Doces' && (cardapioGeral.categoria === 'Doce' || cardapioGeral.categoria === 'Bolo')">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Coquetéis' && (cardapioGeral.categoria === 'Coquetel' || cardapioGeral.categoria === 'Drinque Octavio' || cardapioGeral.categoria === 'Dose')">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Chocolates' && cardapioGeral.categoria === 'Chocolates'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Cafés Da Manhã' && cardapioGeral.categoria === 'Cafés Da Manhã'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Bebidas' && (cardapioGeral.categoria === 'Bebida' || cardapioGeral.categoria === 'Cerveja' || cardapioGeral.categoria === 'Suco')">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+		</div>
+
+		<div *ngFor="let cardapioCafe of cardapiosCafe">
+			<div *ngIf="segment === 'Cafés'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding href="/item">
+						<div class="info" >
+							<!--<img src="{{cardapioGeral.img_url}}" class="thumb">-->
+							<div class="item-content">
+								<div class="title">{{ cardapioCafe.nome }} ({{ cardapioCafe.categoria_superior }})</div>
+								<div class="price">R${{cardapioCafe.preco}}</div>
+								<div class="desc">{{cardapioCafe.descricao_sub_categoria}} </div>
+								<div class="desc">* Entrega após 5 minutos da chegada no estabelecimento </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+		</div>
+	
+	</div>
+</ion-content>

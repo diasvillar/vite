@@ -1,0 +1,11 @@
+ionic cordova build android --release --prod
+
+keytool -genkey -v -keystore ./key.keystore -alias AppKey -keyalg RSA -keysize 2048 -validity 10000
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ./key.keystore ...\vite\platforms\android\app\build\outputs\apk\release/app-release-unsigned.apk AppKey
+>viteapp
+
+cd C:\Users\Vinicios\AppData\Local\Android\Sdk\build-tools\28.0.3
+zipalign -f -v 4 ...\vite\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk ...\vite\platforms\android\app\build\outputs\apk\release\apk-signed-ziped.apk
+
+start ...\vite\platforms\android\app\build\outputs\apk\release\

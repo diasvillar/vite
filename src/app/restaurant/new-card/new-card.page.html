@@ -1,0 +1,38 @@
+<ion-content fullscreen>
+	<div class="header-buttons">
+		<ion-anchor href="/cards-list"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+	</div>
+	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<div class="content">
+		<div class="page-header">Cadastrar novo cartão</div>
+		
+		<ion-list lines="none">
+			<ion-item no-padding>
+				<ion-input placeholder="Número do Cartão"></ion-input>
+			</ion-item>
+			<ion-item no-padding>
+				<ion-input placeholder="Nome do Titular"></ion-input>
+			</ion-item>
+			<ion-item no-padding>
+				<ion-input placeholder="CPF"></ion-input>
+			</ion-item>
+			<ion-item no-padding>
+				<ion-grid no-padding>
+					<ion-row justify-content-between>
+						<ion-col size="7" no-padding>
+							<ion-input placeholder="Vencimento"></ion-input>
+						</ion-col>
+						<ion-col size="5" no-padding>
+							<ion-input placeholder="CSV"></ion-input>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-item>
+		</ion-list>
+
+		<div class="footer-buttons">
+			<ion-button href="/cards-list" color="primary">Cadastrar</ion-button>
+		</div>
+	</div>
+</ion-content>

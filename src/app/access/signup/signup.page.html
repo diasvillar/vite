@@ -1,0 +1,22 @@
+<ion-content padding>
+	<div class="access-content">
+		<p class="access-header-message" no-margin>Crie uma conta Vite e aproveite todas nossas facilidades.</p>
+		<div>
+			<div class="custom-form-access" margin-bottom>
+				<ion-input type="text" [(ngModel)]="usuario.nome" name="nome" placeholder="Nome completo" required></ion-input>
+				<ion-input type="email" [(ngModel)]="usuario.email" name="email" placeholder="E-mail" required></ion-input>
+				<ion-input type="password" [(ngModel)]="usuario.password" name="password" placeholder="Senha" required></ion-input>
+				<ion-input type="password" #confirmation placeholder="Confirmar senha"required></ion-input>
+			</div>
+			<ion-button (click)="submit()" color="primary" expand="block" shape="round">Entrar</ion-button>
+			<div class="button-divisor"><span>ou</span></div>
+			<ion-button color="secondary" expand="block" shape="round">Entrar com Facebook</ion-button>
+		</div>
+		<div>
+			<ion-anchor href="/login" class="access-bottom-text">
+				Já possui conta?<br>
+				<b>Acesse aqui</b>
+			</ion-anchor>
+		</div>
+	</div>
+</ion-content>

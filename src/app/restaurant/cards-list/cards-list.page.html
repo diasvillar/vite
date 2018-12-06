@@ -1,0 +1,27 @@
+<ion-content fullscreen>
+	<div class="header-buttons">
+		<ion-anchor href="/order-end"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+	</div>
+	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<div class="content">
+		<div class="page-header">Fechar conta</div>
+		
+		<h5>Cartões cadastrados</h5>
+		<ion-list class="card-list">
+			<ion-item no-padding>
+				<ion-label>
+					<div class="desc">
+						****.****.****.8989
+					</div>
+				</ion-label>
+				<ion-icon slot="start" src="assets/images/mastercard.svg"></ion-icon>
+			</ion-item>
+		</ion-list>
+		<ion-button color="medium" fill="clear" href="new-card">Cadastrar novo cartão</ion-button>
+
+		<div class="footer-buttons">
+			<ion-button href="/order-confirmed" color="primary">Finalizar Pedido</ion-button>
+		</div>
+	</div>
+</ion-content>

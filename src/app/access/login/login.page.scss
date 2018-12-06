@@ -1,0 +1,10 @@
+ion-content {
+    --ion-padding: 45px;
+    --background: url('/assets/images/polygon.png') left center no-repeat;
+}
+.access-content {
+    height: 85vh;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}

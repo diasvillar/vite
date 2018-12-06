@@ -1,5 +1,7 @@
 {
   "name": "vite",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

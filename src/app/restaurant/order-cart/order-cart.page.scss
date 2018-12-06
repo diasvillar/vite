@@ -1,0 +1,24 @@
+.item-list {
+	ion-item {
+		margin-bottom: 0.7rem;
+		.info {
+			color: var(--ion-color-dark-tint);
+			font-size: 13px;
+			.price {
+				color: var(--ion-color-dark);
+				font-size: 14px;
+			}
+		}
+		.component-quantity {
+			width: 95px;
+		}
+	}
+}
+.total {
+	font-size: 15px;
+	margin-top: 0.5rem;
+	.price {
+		color: var(--ion-color-primary);
+		font-size: 20px;
+	}
+}

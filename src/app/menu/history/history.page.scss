@@ -1,0 +1,49 @@
+.history-list {
+	ion-item {
+		.info {
+			width: 100%;
+			padding-bottom: 1rem;
+			display: flex;
+			justify-content: space-between;
+			.date {
+				background: var(--ion-color-medium-tint);
+				color: #fff;
+				font-size: 14px;
+				min-width: 50px;
+				height: 50px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				border-radius: 5px;
+				.day {
+					font-size: 12px;
+				}
+			}
+			.history-content {
+				width: calc(100% - 50px);
+				margin-left: 1rem;
+				font-size: 14px;
+				.title {
+					color: var(--ion-color-primary);
+					font-size: 17px;
+					font-weight: bold;
+					margin-bottom: 0.4rem;
+				}
+				.item {
+					color: var(--ion-color-dark-tint);
+					margin-bottom: 0.4rem;
+				}
+				.value {
+					color: var(--ion-color-dark);
+					margin-top: 0.7rem;
+					margin: 0.7rem 0px 0.3rem 0px;
+					font-weight: bold;
+				}
+				.price {
+					color: var(--ion-color-primary);
+				}
+			}
+		}
+	}
+}
