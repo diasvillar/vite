@@ -1,9 +1,9 @@
 <ion-content fullscreen>
 	<div class="header-buttons">
-		<ion-anchor href="/restaurant"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="seleciona(restaurante)"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
 		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
 	</div>
-	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<img src="{{imagem}}" class="bg-image">
 	<div class="content">
 		<div class="item-title">
 			<div class="page-header">Brie, Nozes e Mel</div>

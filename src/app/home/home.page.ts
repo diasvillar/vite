@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
 		  }
 		  else{
 	
-			this.presentLoading();
+			//this.presentLoading();
 
 			await this._http
 			.get('https://viniciusvillar.000webhostapp.com/vite/page/get_ionic')
@@ -44,11 +44,11 @@ export class HomePage implements OnInit {
 			.toPromise()
 			.then(restaurantes => {
 			  this.restaurantes = restaurantes;
-			  this.loading.dismiss();
+			  //this.loading.dismiss();
 			})
 			.catch(err => {
 			  console.log(err);
-			  this.loading.dismiss();
+			  //this.loading.dismiss();
 			  this.presentFailAlert();
 
 			});
@@ -73,12 +73,12 @@ export class HomePage implements OnInit {
 		await alert.present();
 	}
 
-	async presentLoading() {
+/*	async presentLoading() {
 		 this.loading = await this._loadingCtrl.create({
 			message: 'Listando restaurantes. Aguarde...'
 		});
 		return await this.loading.present();
-	}
+	}*/
 
 	seleciona(restaurante){
 		console.log('Entrou na Action seleciona');

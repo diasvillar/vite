@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { Http } from '@angular/http';
-import {ActivatedRoute} from "@angular/router";
+import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
 
 import { Restaurante } from '../../domain/restaurante/restaurante';
 import { CardapioCafe } from '../../domain/cardapioCafe/cardapioCafe';
@@ -20,22 +20,22 @@ export class RestaurantPage implements OnInit {
 	itens : any[] = [,,,,,,,,];
 
 	categorias :any[];
-    pedido: number = 0;
+  pedido: number = 0;
 	public restaurante: Restaurante;
-    public url: string;
-    public urlGeral: string;
-    public urlCategoria: string;
-    public cardapiosCafe: CardapioCafe[];
+  public url: string;
+  public urlGeral: string;
+  public urlCategoria: string;
+  public cardapiosCafe: CardapioCafe[];
 	public cardapiosGeral: CardapioGeral[];
 	public loading: any;
 	
 	constructor(
 		public navCtrl: NavController,
-        private _http: Http,
-        private _loadingCtrl: LoadingController,
-        private _alertCtrl: AlertController,
-		//public navParams: NavParams,
-		private route: ActivatedRoute
+    private _http: Http,
+    private _loadingCtrl: LoadingController,
+    private _alertCtrl: AlertController,
+		private route: ActivatedRoute,
+		private router: Router
 	) { 
 		this.route.queryParams.subscribe(params => {
 			this.restaurante = new Restaurante(null, null, null, null, null, null);
@@ -45,13 +45,12 @@ export class RestaurantPage implements OnInit {
 			this.restaurante.imgurl = params["imgurl"];
 			this.restaurante.imgtopo = params["imgtopo"];
 			this.restaurante.endereco = params["endereco"];
-			//console.log(JSON.stringify(this.restaurante) + "\n");
 		});
 
 		this.urlCategoria = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_categorias_cardapio/";
 		this.url = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_cafe_json/"+this.restaurante.id;
 		this.urlGeral = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_geral_json/"+this.restaurante.id;
-		this.segment = "";
+		this.segment = "Cafés";
 		
 	}
 	
@@ -197,6 +196,59 @@ export class RestaurantPage implements OnInit {
 	this.segment = "Cafés";
 	console.log("segment: " + this.segment + "\n");
   }
+
+  selecionaCafe(cardapioCafe, restaurante){
+	console.log('Entrou na Action seleciona');
+	let navigationExtras: NavigationExtras = {
+		queryParams: {
+			"id" : restaurante.id,
+			"nome" : restaurante.nome,
+			"telefone" : restaurante.telefone,
+			"imgurl" : restaurante.imgurl,
+			"imgtopo" : restaurante.imgtopo,
+			"endereco" : restaurante.endereco,
+			"cardapioCafeId": cardapioCafe.id,
+			"cardapioCafeRestauranteId": cardapioCafe.restaurante_id,
+			"cardapioCafeCategoriaSuperior": cardapioCafe.categoria_superior,
+			"cardapioCafeDescricaoCategoria": cardapioCafe.descricao_categoria,
+			"cardapioCafeNome": cardapioCafe.nome,
+			"cardapioCafePreco": cardapioCafe.preco,
+			"cardapioCafeDescricaoSubCategoria": cardapioCafe.descricao_sub_categoria,
+			"tipo": 0
+		}
+	};
+	console.log(JSON.stringify(navigationExtras));
+	this.router.navigate(['/item'],  navigationExtras);
+	//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+}
+
+  selecionaGeral(cardapioGeral, restaurante){
+	console.log('Entrou na Action seleciona');
+	let navigationExtras: NavigationExtras = {
+		queryParams: {
+			"id" : restaurante.id,
+			"nome" : restaurante.nome,
+			"telefone" : restaurante.telefone,
+			"imgurl" : restaurante.imgurl,
+			"imgtopo" : restaurante.imgtopo,
+			"endereco" : restaurante.endereco,
+			"cardapioGeralId": cardapioGeral.id,
+			"cardapioGeralRestauranteId": cardapioGeral.restaurante_id,
+			"cardapioGeralCategoria": cardapioGeral.categoria,
+			"cardapioGeralDescricao": cardapioGeral.descricao,
+			"cardapioGeralNome": cardapioGeral.nome,
+			"cardapioGeralPreco": cardapioGeral.preco,
+			"cardapioGeralImgUrl": cardapioGeral.img_url,
+			"cardapioGeralTempo": cardapioGeral.tempo,
+      "cardapioGeralTempoMin": cardapioGeral.tempo_min,
+			"cardapioGeralTempoMax": cardapioGeral.tempo_max,
+			"tipo": 1
+		}
+	};
+	console.log(JSON.stringify(navigationExtras));
+	this.router.navigate(['/item'],  navigationExtras);
+	//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+}
 
 
   goToConfirmation(){
