@@ -50,11 +50,15 @@ export class RestaurantPage implements OnInit {
 		this.urlCategoria = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_categorias_cardapio/";
 		this.url = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_cafe_json/"+this.restaurante.id;
 		this.urlGeral = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_geral_json/"+this.restaurante.id;
-		this.segment = "Cafés";
+		this.segment = "Bebidas";
 		
 	}
 	
 	async ngOnInit() {
+
+		if(sessionStorage.getItem('flagLogado')!="sim"){
+      this.goToLogin();
+    }
 		
 		this.presentLoading();
 	  
@@ -110,10 +114,11 @@ export class RestaurantPage implements OnInit {
 				 this.presentFailAlert();
 				 this.goToConfirmation();
 			  });
-	  
-		     
-
 	}
+
+	goToLogin(){
+    this.navCtrl.navigateRoot('/login');
+  }
 	
 	async presentLoading() {
 		this.loading = await this._loadingCtrl.create({

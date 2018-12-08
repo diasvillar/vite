@@ -3,39 +3,157 @@
 		<ion-anchor (click)="seleciona(restaurante)"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
 		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
 	</div>
-	<img src="{{imagem}}" class="bg-image">
-	<div class="content">
-		<div class="item-title">
-			<div class="page-header">Brie, Nozes e Mel</div>
-			<div class="item-price">R$32,90</div>
-		</div>
-		<p class="item-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
-		<p class="item-sub-title"><b>Adicionais</b></p>
-		<ion-list class="list-itens" lines="none">
-			<ion-item no-padding>
-				<ion-checkbox slot="start" color="success"></ion-checkbox>
-				<ion-label>Borda recheada</ion-label>
-				<ion-note slot="end">+R$5,90</ion-note>
-			</ion-item>
-			<ion-item no-padding>
-				<ion-checkbox slot="start" color="success"></ion-checkbox>
-				<ion-label>Queijo em dobro</ion-label>
-				<ion-note slot="end">+R$5,90</ion-note>
-			</ion-item>
-		</ion-list>
-		<p class="item-sub-title"><b>Observações</b></p>
-		<ion-textarea placeholder="Deseja fazer alguma observação?"></ion-textarea>
-		<div class="add-item">
-			<div class="component-quantity">
-				<div class="minus"><ion-icon name="f-minus"></ion-icon></div>
-				<div class="number">1</div>
-				<div class="plus"><ion-icon name="f-plus"></ion-icon></div>
+
+	<div *ngIf="tipo == 0">
+		<img src="{{restaurante.imgtopo}}" class="bg-image">
+		<div class="content" >
+			<div class="item-title">
+				<div class="page-header">{{ cardapioCafe.nome }} ({{ cardapioCafe.categoria_superior }})</div>
+				<div class="item-price">R${{cardapioCafe.preco}}</div>
 			</div>
-			<ion-button color="primary" shape="round" fill="outline" size="small">Adicionar</ion-button>
+			<p class="item-desc">{{cardapioCafe.descricao_sub_categoria}}</p>
+			<p class="item-sub-title"><b>Método de Preparo</b></p>
+			<div class="cc-selector">
+				<ion-list class="list-itens" lines="none">
+					<ion-radio-group name="metodos" ngDefaultControl [(ngModel)]="radioData">
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success" id="prensa" type="radio" name="metodos" value="Prensa Francesa" checked></ion-radio>
+							<ion-label>Prensa Francesa</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success" id="clever" type="radio" name="metodos" value="Clever"></ion-radio>
+							<ion-label>Clever</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success"  id="turco" type="radio" name="metodos" value="Turco"></ion-radio>
+							<ion-label>Turco</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success"  id="hario" type="radio" name="metodos" value="Hario V60"></ion-radio>
+							<ion-label>Hario V60</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success"  id="pano" type="radio" name="metodos" value="Coador de Pano"></ion-radio>
+							<ion-label>Coador de Pano</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio  slot="start" color="success" id="kalita" type="radio" name="metodos" value="Kalita"></ion-radio>
+							<ion-label>Kalita</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success" id="chemex" type="radio" name="metodos" value="Chemex"></ion-radio>
+							<ion-label>Chemex</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success" id="cafeor" type="radio" name="metodos" value="Cafeor"></ion-radio>
+							<ion-label>Cafeor</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success" id="syphon" type="radio" name="metodos" value="Syphon"></ion-radio>
+							<ion-label>Syphon Coffee</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success" id="moka" type="radio" name="metodos" value="Moka"></ion-radio>
+							<ion-label>Moka</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success" id="aeropress" type="radio" name="metodos" value="Aeropress"></ion-radio>
+							<ion-label>Aeropress</ion-label>
+							<ion-note slot="end"></ion-note>
+						</ion-item>
+					</ion-radio-group>
+				</ion-list>
+			</div>
+			<p class="item-sub-title"><b>Observações</b></p>
+			<ion-textarea [(ngModel)]="obs" name="observacao" placeholder="Deseja fazer alguma observação?"></ion-textarea>
+			<div class="add-item">
+				<div class="component-quantity">
+					<div class="minus"><ion-icon name="f-minus" (click)="decreaseQuantity(numPrato)"></ion-icon></div>
+					<div class="number">{{numPrato}}</div>
+					<div class="plus"><ion-icon name="f-plus" (click)="increaseQuantity(numPrato)"></ion-icon></div>
+				</div>
+				<ion-button color="primary" shape="round" fill="outline" size="small" (click)="addCart()">Adicionar</ion-button>
+			</div>
+			<div class="footer-buttons">
+				<ion-button (click)="seleciona(restaurante)" color="medium">Continuar Pedindo</ion-button>
+				<ion-button href="/order-end" color="primary">Finalizar Pedido</ion-button>
+			</div>
 		</div>
-		<div class="footer-buttons">
-			<ion-button href="/restaurant" color="medium">Continuar Pedindo</ion-button>
-			<ion-button href="/order-end" color="primary">Finalizar Pedido</ion-button>
+	</div>
+
+	<div *ngIf="tipo == 1">
+		<img src="{{cardapioGeral.img_url}}" class="bg-image">
+		<div class="content" >
+			<div class="item-title">
+				<div class="page-header">{{cardapioGeral.nome}}</div>
+				<div class="item-price">R${{cardapioGeral.preco}}</div>
+			</div>
+			<p class="item-desc">{{cardapioGeral.descricao}}</p>
+			
+			<div *ngIf="cardapioGeral.nome == 'Refrigerantes' ">
+				<p class="item-sub-title"><b>Adicionais</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="refrigerantes" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="coca" type="radio" name="refrigerantes" value="Coca-Cola" checked></ion-radio>
+									<ion-label>Coca-Cola</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="cocaZero" type="radio" name="refrigerantes" value="Coca-Cola Zero"></ion-radio>
+									<ion-label>Coca-Cola Zero</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success"  id="guarana" type="radio" name="refrigerantes" value="Guaraná Antarctica"></ion-radio>
+									<ion-label>Guaraná Antarctica</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success"  id="guaranaZero" type="radio" name="refrigerantes" value="Guaraná Antarctica Zero"></ion-radio>
+									<ion-label>Guaraná Antarctica Zero</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success"  id="fanta" type="radio" name="refrigerantes" value="Fanta Laranja"></ion-radio>
+									<ion-label>Fanta Laranja</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio  slot="start" color="success" id="sprite" type="radio" name="refrigerantes" value="Sprite"></ion-radio>
+									<ion-label>Sprite</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<p class="item-sub-title"><b>Observações</b></p>
+			<ion-textarea [(ngModel)]="obs" name="observacao" placeholder="Deseja fazer alguma observação?"></ion-textarea>
+			<div class="add-item">
+				<div class="component-quantity">
+					<div class="minus"><ion-icon name="f-minus" (click)="decreaseQuantity(numPrato)"></ion-icon></div>
+					<div class="number">{{numPrato}}</div>
+					<div class="plus"><ion-icon name="f-plus" (click)="increaseQuantity(numPrato)"></ion-icon></div>
+				</div>
+				<ion-button color="primary" shape="round" fill="outline" size="small" (click)="addCart()">Adicionar</ion-button>
+			</div>
+			<div class="footer-buttons">
+				<ion-button (click)="seleciona(restaurante)" color="medium">Continuar Pedindo</ion-button>
+				<ion-button href="/order-end" color="primary">Finalizar Pedido</ion-button>
+			</div>
 		</div>
 	</div>
 </ion-content>
