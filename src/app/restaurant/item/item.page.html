@@ -96,12 +96,12 @@
 		<div class="content" >
 			<div class="item-title">
 				<div class="page-header">{{cardapioGeral.nome}}</div>
-				<div class="item-price">R${{cardapioGeral.preco}}</div>
+				<div class="item-price">R${{valorTela}}</div>
 			</div>
 			<p class="item-desc">{{cardapioGeral.descricao}}</p>
 			
 			<div *ngIf="cardapioGeral.nome == 'Refrigerantes' ">
-				<p class="item-sub-title"><b>Adicionais</b></p>	
+				<p class="item-sub-title"><b>Refrigerante</b></p>	
 				<div class="cc-selector">		
 					<ion-list class="list-itens" lines="none">
 						<ion-radio-group name="refrigerantes" ngDefaultControl [(ngModel)]="radioData">
@@ -139,6 +139,304 @@
 					</ion-list>
 				</div>
 			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Água' ">
+				<p class="item-sub-title"><b>Água</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="agua" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="aguaCGas" type="radio" name="agua" value="Água com Gás" checked></ion-radio>
+									<ion-label>Água com Gás</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="aguaSGas" type="radio" name="agua" value="Água sem Gás"></ion-radio>
+									<ion-label>Água sem Gás</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Cervejas Especiais' ">
+				<p class="item-sub-title"><b>Cerveja</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="cervejaE" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="erdinger" type="radio" name="cervejaE" value="Erdinger" checked></ion-radio>
+									<ion-label>Erdinger</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="paulistania" type="radio" name="cervejaE" value="Paulistânia"></ion-radio>
+									<ion-label>Paulistânia</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Cervejas Premium' ">
+				<p class="item-sub-title"><b>Cerveja</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="cervejaP" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="heineken" type="radio" name="cervejaP" value="Heineken" checked></ion-radio>
+									<ion-label>Heineken</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="stella" type="radio" name="cervejaP" value="Stella Artois"></ion-radio>
+									<ion-label>Stella Artois</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Chocolate Gelado' || cardapioGeral.nome == 'Chocolate Quente' || cardapioGeral.nome == 'Choco Spicy'">
+				<p class="item-sub-title"><b>Leite</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="chocolate" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="leiteI" type="radio" name="chocolate" value="Leite Integral" checked></ion-radio>
+									<ion-label>Leite Integral</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="leiteD" type="radio" name="chocolate" value="Leite Desnatadpo"></ion-radio>
+									<ion-label>Leite Desnatadpo</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success"  id="leiteS" type="radio" name="chocolate" value="Leite de Soja"></ion-radio>
+									<ion-label>Leite de Soja</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success"  id="leiteA" type="radio" name="chocolate" value="Leite de Amêndoas"></ion-radio>
+									<ion-label>Leite de Amêndoas</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success"  id="leiteC" type="radio" name="chocolate" value="Leite de Coco"></ion-radio>
+									<ion-label>Leite de Coco</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Irish Coffee' || cardapioGeral.nome == 'Preto' || cardapioGeral.nome == 'Verde' || cardapioGeral.nome == 'Vermelho' || cardapioGeral.nome == 'Hortelã' || cardapioGeral.nome == 'Capim Santo' || cardapioGeral.nome == 'Chá da Fazenda' ">
+				<p class="item-sub-title"><b>Temperatura</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="cha" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="quente" type="radio" name="cha" value="Quente" checked></ion-radio>
+									<ion-label>Quente</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="gelado" type="radio" name="cha" value="Gelado"></ion-radio>
+									<ion-label>Gelado</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Pão de Queijo' ">
+				<p class="item-sub-title"><b>Tipo</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="salgado" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="tradicional" type="radio" name="salgado" value="Tradicional" checked></ion-radio>
+									<ion-label>Tradicional</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="multigrao" type="radio" name="salgado" value="Multigrão"></ion-radio>
+									<ion-label>Multigrão</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Ovos Mexidos' ">
+				<p class="item-sub-title"><b>Queijo</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="ovo" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="queijoB" type="radio" name="ovo" value="Queijo Branco" checked></ion-radio>
+									<ion-label>Queijo Branco</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="queijoP" type="radio" name="ovo" value="Queijo Parmesão"></ion-radio>
+									<ion-label>Queijo Parmesão</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Ovos Benedict' ">
+				<p class="item-sub-title"><b>Acompanhamento</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="ovo" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="salmao" type="radio" name="ovo" value="Salmão" checked></ion-radio>
+									<ion-label>Salmão</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="presunto" type="radio" name="ovo" value="Presunto de Parma"></ion-radio>
+									<ion-label>Presunto de Parma</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Mineirinho' ">
+				<p class="item-sub-title"><b>Pão Francês</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="pao" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="paoT" type="radio" name="pao" value="Pão Francês Tradicional" checked></ion-radio>
+									<ion-label>Pão Francês Tradicional</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="paoI" type="radio" name="pao" value="Pão Francês Integral"></ion-radio>
+									<ion-label>Pão Francês Integral</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+			
+			<div *ngIf="cardapioGeral.nome == 'Fraldinha' || cardapioGeral.nome == 'Salmão Defumado'">
+				<p class="item-sub-title"><b>Acompanhamento</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="sanduba" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="salada" type="radio" name="sanduba" value="Salada" checked></ion-radio>
+									<ion-label>Salada</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="chips" type="radio" name="sanduba" value="Chips de Batata"></ion-radio>
+									<ion-label>Chips de Batata</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Bruschetta' ">
+				<p class="item-sub-title"><b>Sabor</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="petisco" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="napolitana" type="radio" name="petisco" value="Napolitana" checked></ion-radio>
+									<ion-label>Napolitana</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="queijo" type="radio" name="petisco" value="Queijo Brie, Geléia e Amêndoas"></ion-radio>
+									<ion-label>Queijo Brie, Geléia e Amêndoas</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Amaretto' || cardapioGeral.nome == 'Caramelo Brûlé' || cardapioGeral.nome == 'Menta Café' || cardapioGeral.nome == 'Orgeat' || cardapioGeral.nome == 'Mocha' || cardapioGeral.nome == 'Proteico'">
+				<p class="item-sub-title"><b>Adicionais</b></p>	
+				<ion-list class="list-itens" lines="none">
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="leite" (ionChange)="updateLeite()"></ion-checkbox>
+						<ion-label>Leite</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="chantilly" (ionChange)="updateChantilly()"></ion-checkbox>
+						<ion-label>Chantilly</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="nutella" (ionChange)="updateNutella()"></ion-checkbox>
+						<ion-label>Nutella</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="doceLeite" (ionChange)="updateDoceLeite()"></ion-checkbox>
+						<ion-label>Doce de Leite</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Bolo Octavio' || cardapioGeral.nome == 'Coco Gelado' || cardapioGeral.nome == 'Cenoura' || cardapioGeral.nome == 'Bolo de Chocolate' || cardapioGeral.nome == 'Maçã com Banana' || cardapioGeral.nome == 'Red Velvet' || cardapioGeral.nome == 'Fubá Cremoso'">
+				<p class="item-sub-title"><b>Adicionais</b></p>	
+				<ion-list class="list-itens" lines="none">
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="sorvete" (ionChange)="updateSorvete()"></ion-checkbox>
+						<ion-label>Sorvete</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="chantilly" (ionChange)="updateChantilly()"></ion-checkbox>
+						<ion-label>Chantilly</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="nutella" (ionChange)="updateNutella()"></ion-checkbox>
+						<ion-label>Nutella</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="doceLeite" (ionChange)="updateDoceLeite()"></ion-checkbox>
+						<ion-label>Doce de Leite</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="caldaChocolate" (ionChange)="updateCaldaChocolate()"></ion-checkbox>
+						<ion-label>Calda de Chocolate</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="caramelo" (ionChange)="updateCaramelo()"></ion-checkbox>
+						<ion-label>Caramelo</ion-label>
+						<ion-note slot="end">+R$5,00</ion-note>
+					</ion-item>
+				</ion-list>
+			</div>
+
 
 			<p class="item-sub-title"><b>Observações</b></p>
 			<ion-textarea [(ngModel)]="obs" name="observacao" placeholder="Deseja fazer alguma observação?"></ion-textarea>

@@ -24,6 +24,9 @@
 				<ion-segment-button value="Cafés Da Manhã" (click)="selectedCafesDaManha()">
 					Cafés Da Manhã
 				</ion-segment-button>
+				<ion-segment-button value="Chás" (click)="selectedChas()">
+					Chás
+				</ion-segment-button>
 				<ion-segment-button value="Chocolates" (click)="selectedChocolates()">
 					Chocolates
 				</ion-segment-button>
@@ -202,6 +205,22 @@
 			</div>
 
 			<div *ngIf="segment === 'Chocolates' && cardapioGeral.categoria === 'Chocolates'">
+				<ion-list class="item-list" lines="none">
+					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
+						<div class="info" >
+							<img src="{{cardapioGeral.img_url}}" class="thumb">
+							<div class="item-content">
+								<div class="title">{{ cardapioGeral.nome }}</div>
+								<div class="price">R${{cardapioGeral.preco}}</div>
+								<div class="desc">{{cardapioGeral.descricao}} </div>
+								<div class="desc">* Tempo de preparo: {{cardapioGeral.tempo}} minutos </div>
+							</div>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="segment === 'Chás' && cardapioGeral.categoria === 'Chás'">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >

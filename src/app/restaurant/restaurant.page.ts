@@ -50,7 +50,7 @@ export class RestaurantPage implements OnInit {
 		this.urlCategoria = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_categorias_cardapio/";
 		this.url = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_cafe_json/"+this.restaurante.id;
 		this.urlGeral = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_geral_json/"+this.restaurante.id;
-		this.segment = "Bebidas";
+		this.segment = "Cafés Da Manhã";
 		
 	}
 	
@@ -143,64 +143,69 @@ export class RestaurantPage implements OnInit {
   }
 
   selectedShakes(){
-	this.segment = "Shakes";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Shakes";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedSanduiches(){
-	this.segment = "Sanduíches";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Sanduíches";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedSalgados(){
-	this.segment = "Salgados";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Salgados";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedPratos(){
-	this.segment = "Pratos";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Pratos";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedPetiscos(){
-	this.segment = "Petiscos";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Petiscos";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedEspressos(){
-	this.segment = "Espressos";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Espressos";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedDoces(){
-	this.segment = "Doces";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Doces";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedCoqueteis(){
-	this.segment = "Coquetéis";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Coquetéis";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedChocolates(){
-	this.segment = "Chocolates";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Chocolates";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedCafesDaManha(){
-	this.segment = "Cafés Da Manhã";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Cafés Da Manhã";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedBebidas(){
-	this.segment = "Bebidas";
-	console.log("segment: " + this.segment + "\n");
+		this.segment = "Bebidas";
+		console.log("segment: " + this.segment + "\n");
   }
 
   selectedCafes(){
-	this.segment = "Cafés";
-	console.log("segment: " + this.segment + "\n");
-  }
+		this.segment = "Cafés";
+		console.log("segment: " + this.segment + "\n");
+	}
+	
+	selectedChas(){
+		this.segment = "Chás";
+		console.log("segment: " + this.segment + "\n");
+	}
 
   selecionaCafe(cardapioCafe, restaurante){
 	console.log('Entrou na Action seleciona');

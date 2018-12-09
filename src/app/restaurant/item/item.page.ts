@@ -28,6 +28,15 @@ export class ItemPage implements OnInit {
   tipo: number;
   numPrato: number;
   obs: string;
+  leite: Boolean;
+  chantilly: Boolean;
+  nutella: Boolean;
+  doceLeite: Boolean;
+  sorvete: Boolean;
+  caldaChocolate: Boolean;
+  caramelo: Boolean;
+  valorTela: number;
+  acrescimo: string = "Acrescimo:";
 
   constructor(
     private route: ActivatedRoute,
@@ -57,6 +66,7 @@ export class ItemPage implements OnInit {
         this.cardapioCafe.descricao_sub_categoria = params["cardapioCafeDescricaoSubCategoria"];
         this.imagem = this.restaurante.imgurl;
         this.radioData = "Prensa Francesa";
+        this.valorTela = +this.cardapioCafe.preco;
       }
       else{
         this.cardapioGeral = new CardapioGeral(null, null, null, null, null, null, null, null, null, null);
@@ -71,9 +81,35 @@ export class ItemPage implements OnInit {
         this.cardapioGeral.tempo_min = params["cardapioGeralTempoMin"];
         this.cardapioGeral.tempo_max = params["cardapioGeralTempoMax"];
         this.imagem = this.cardapioGeral.img_url;
+        this.valorTela = +this.cardapioGeral.preco;
+
         if(this.cardapioGeral.nome === "Refrigerantes"){
           this.radioData = "Coca-Cola";
-        }
+        }else if(this.cardapioGeral.nome === "Água"){
+                this.radioData = "Água com Gás";
+              }else if(this.cardapioGeral.nome === "Cervejas Especiais"){
+                this.radioData = "Erdinger";
+                    }else if(this.cardapioGeral.nome === "Cervejas Premium"){
+                      this.radioData = "Heineken";
+                          }else if(this.cardapioGeral.nome === "Chocolate Gelado" || this.cardapioGeral.nome === "Chocolate Quente" || this.cardapioGeral.nome === "Choco Spicy"){
+                            this.radioData = "Leite Integral";
+                                }else if(this.cardapioGeral.nome === "Preto" || this.cardapioGeral.nome === "Verde" || this.cardapioGeral.nome === "Vermelho" || this.cardapioGeral.nome === "Hortelã" || this.cardapioGeral.nome === "Capim Santo" || this.cardapioGeral.nome === "Chá da Fazenda" || this.cardapioGeral.nome === "Irish Coffee"){
+                                  this.radioData = "Quente";
+                                      }else if(this.cardapioGeral.nome === "Pão de Queijo" ){
+                                        this.radioData = "Tradicional";
+                                            }else if(this.cardapioGeral.nome === "Ovos Mexidos" ){
+                                              this.radioData = "Queijo Branco";
+                                                  }else if(this.cardapioGeral.nome === "Ovos Benedict" ){
+                                                    this.radioData = "Salmão";
+                                                        }else if(this.cardapioGeral.nome === "Mineirinho" ){
+                                                          this.radioData = "Pão Francês Tradicional";
+                                                              }else if(this.cardapioGeral.nome === "Fraldinha" || this.cardapioGeral.nome === "Salmão Defumado" ){
+                                                                this.radioData = "Salada";
+                                                                    }else if(this.cardapioGeral.nome === "Bruschetta" ){
+                                                                      this.radioData = "Napolitana";
+                                                                          }else{
+                                                                            this.radioData = "";
+                                                                          }
       }
     });
     //this.radioData = "Coca-Cola";
@@ -82,7 +118,7 @@ export class ItemPage implements OnInit {
     this.pedido.cardapio = this.cardapioCafe;
     this.pedido.cardapioGeral = this.cardapioGeral;
     this.numPrato = 1;
-    
+       
   }
 
   ngOnInit() {
@@ -135,78 +171,160 @@ export class ItemPage implements OnInit {
     else{
       console.log("Carrinho vazio");
     } 
+
+    this.pedido.quantidade = this.numPrato;
+    this.pedido.observacao = this.obs;
+    if(this.pedido.cardapio  != null){
+      this.cart.valor_total = this.cart.valor_total*1 + (this.pedido.cardapio.preco * this.pedido.quantidade);
+      if(this.leite){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Leite |";
+      }
+      if(this.chantilly){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Chantilly |";
+      }
+      if(this.nutella){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Nutella |";
+      }
+      if(this.doceLeite){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Doce de Leite |";
+      }
+      if(this.sorvete){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Sorvete |";
+      }
+      if(this.caldaChocolate){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Calda de Chocolate |";
+      }
+      if(this.caramelo){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Caramelo |";
+      }
+   }
+   else{
+      this.cart.valor_total = this.cart.valor_total*1 +  (this.pedido.cardapioGeral.preco * this.pedido.quantidade);
+      if(this.leite){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Leite |";
+      }
+      if(this.chantilly){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Chantilly |";
+      }
+      if(this.nutella){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Nutella |";
+      }
+      if(this.doceLeite){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Doce de Leite |";
+      }
+      if(this.sorvete){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Sorvete |";
+      }
+      if(this.caldaChocolate){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Calda de Chocolate |";
+      }
+      if(this.caramelo){
+        this.cart.valor_total += (5*this.pedido.quantidade);
+        this.acrescimo += "| Caramelo |";
+      }
+    }
+
+    if(this.leite || this.chantilly || this.nutella || this.doceLeite){
+      this.pedido.metodo = this.acrescimo
+    }else{ 
+      this.pedido.metodo = this.radioData;
+    }
+
    if(this.cart.pedidos==null || this.cart.pedidos.length == 0){
-     this.pedido.quantidade = this.numPrato;
-     //this.cart.metodo = this.radioData;
-     this.pedido.metodo = this.radioData;
-     this.pedido.observacao = this.obs;
-     this.pedidos[0] = this.pedido;
-     this.cart.pedidos = this.pedidos;
-     if(this.pedido.cardapio  != null){
-        this.cart.valor_total = this.pedido.cardapio.preco;
-     }
-     else{
-        this.cart.valor_total = this.pedido.cardapioGeral.preco;
-     }
-     this.cart.usuario = sessionStorage.getItem('usuarioId');
-     this.cart.nome = sessionStorage.getItem('usuarioName');
-     this.cart.email = sessionStorage.getItem('usuarioLogado');
 
-     sessionStorage.setItem("cart", JSON.stringify(this.cart));
+      this.pedidos[0] = this.pedido;
+      this.cart.pedidos = this.pedidos;
+      this.cart.usuario = sessionStorage.getItem('usuarioId');
+      this.cart.nome = sessionStorage.getItem('usuarioName');
+      this.cart.email = sessionStorage.getItem('usuarioLogado');
 
-     console.log(sessionStorage.getItem('cart'))
+      sessionStorage.setItem("cart", JSON.stringify(this.cart));
+
+      console.log(sessionStorage.getItem('cart'));
 
    }else
-   if(this.cart.pedidos.length>0){
-     let flag=true;
-     if(this.pedido.cardapio  != null){
-        this.cart.pedidos.forEach((cardapio) => {
-          if(cardapio.cardapio != null){
-            if(cardapio.cardapio.id == this.pedido.cardapio.id && cardapio.metodo == this.radioData){
-              console.log("pedido já se encontra no carrinho");
-              flag=false;
-            }
+      if(this.cart.pedidos.length>0){
+        let flag=true;
+        if(this.pedido.cardapio  != null){
+            this.cart.pedidos.forEach((cardapio) => {
+              if(cardapio.cardapio != null){
+                if(cardapio.cardapio.id == this.pedido.cardapio.id && (cardapio.metodo == this.radioData || cardapio.metodo == this.acrescimo)){
+                  console.log("pedido já se encontra no carrinho");
+                  flag=false;
+                }
+              }
+            });
           }
-        });
-      }
-      else{
-        this.cart.pedidos.forEach((cardapio) => {
+          else{
+            this.cart.pedidos.forEach((cardapio) => {
 
-          if(cardapio.cardapio == null){
-            //console.log(JSON.stringify(cardapioGeral) + "\n\n");
-            
-            if(cardapio.cardapioGeral.id == this.pedido.cardapioGeral.id && cardapio.metodo == this.radioData){
-              console.log("pedido já se encontra no carrinho");
-              flag=false;
-            }    
+              if(cardapio.cardapio == null){
+                //console.log(JSON.stringify(cardapioGeral) + "\n\n");
+                
+                if(cardapio.cardapioGeral.id == this.pedido.cardapioGeral.id && (cardapio.metodo == this.radioData || cardapio.metodo == this.acrescimo)){
+                  console.log("pedido já se encontra no carrinho");
+                  flag=false;
+                }    
+              }
+            });
+
           }
-        });
+        
+        if(flag){
 
+          let arrayIndex = this.cart.pedidos.length;
+          this.cart.pedidos[arrayIndex] = this.pedido;     
+          sessionStorage.setItem("cart", JSON.stringify(this.cart));
+        }
+        //console.log("radioData: " + this.radioData + "\n\n");
+        console.log(sessionStorage.getItem('cart'));
       }
-     
-     if(flag){
-       this.pedido.quantidade = this.numPrato;
-       let arrayIndex = this.cart.pedidos.length;
-       if(this.pedido.cardapio  != null){
-          this.cart.valor_total = this.cart.valor_total*1 + this.pedido.cardapio.preco*1;
-       }
-       else{
-          this.cart.valor_total = this.cart.valor_total*1 + this.pedido.cardapioGeral.preco*1;
-       }
-       //this.cart.metodo = this.radioData;
-       this.pedido.metodo = this.radioData;
-       this.pedido.observacao = this.obs;
-       this.cart.pedidos[arrayIndex] = this.pedido;     
-       sessionStorage.setItem("cart", JSON.stringify(this.cart));
-     }
-     //console.log("radioData: " + this.radioData + "\n\n");
-     console.log(sessionStorage.getItem('cart'))
-   }
-   this.seleciona(this.restaurante);
+      this.seleciona(this.restaurante);
   }
   
   increaseQuantity(index) {
     this.numPrato += 1;
+    if(this.pedido.cardapio  != null){
+      this.valorTela += +this.cardapioCafe.preco;
+    }
+    else{
+      this.valorTela += +this.cardapioGeral.preco;
+    }
+
+    if(this.leite){
+      this.valorTela += 5;
+    }
+    if(this.chantilly){
+      this.valorTela += 5;
+    }
+    if(this.nutella){
+      this.valorTela += 5;
+    }
+    if(this.doceLeite){
+      this.valorTela += 5;
+    }
+    if(this.sorvete){
+      this.valorTela += 5;
+    }
+    if(this.caldaChocolate){
+      this.valorTela += 5;
+    }
+    if(this.caramelo){
+      this.valorTela += 5;
+    }
   }
   
   decreaseQuantity(index) {
@@ -215,7 +333,97 @@ export class ItemPage implements OnInit {
     }
     else{
       this.numPrato -= 1;
+      if(this.pedido.cardapio  != null){
+        this.valorTela -= +this.cardapioCafe.preco;
+      }
+      else{
+        this.valorTela -= +this.cardapioGeral.preco;
+      }
+      if(this.leite){
+        this.valorTela -= 5;
+      }
+      if(this.chantilly){
+        this.valorTela -= 5;
+      }
+      if(this.nutella){
+        this.valorTela -= 5;
+      }
+      if(this.doceLeite){
+        this.valorTela -= 5;
+      }
+      if(this.sorvete){
+        this.valorTela -= 5;
+      }
+      if(this.caldaChocolate){
+        this.valorTela -= 5;
+      }
+      if(this.caramelo){
+        this.valorTela -= 5;
+      }
     }    
+  }
+
+  updateLeite(){
+    if(this.leite){
+      this.valorTela += (5*this.numPrato);
+    }
+    else{
+      this.valorTela -= (5*this.numPrato);
+    }
+  }
+
+  updateChantilly(){
+    if(this.chantilly){
+      this.valorTela += (5*this.numPrato);
+    }
+    else{
+      this.valorTela -= (5*this.numPrato);
+    }
+  }
+
+  updateNutella(){
+    if(this.nutella){
+      this.valorTela += (5*this.numPrato);
+    }
+    else{
+      this.valorTela -= (5*this.numPrato);
+    }
+  }
+
+  updateDoceLeite(){
+    if(this.doceLeite){
+      this.valorTela += (5*this.numPrato);
+    }
+    else{
+      this.valorTela -= (5*this.numPrato);
+    }
+  }
+
+  updateSorvete(){
+    if(this.sorvete){
+      this.valorTela += (5*this.numPrato);
+    }
+    else{
+      this.valorTela -= (5*this.numPrato);
+    }
+  }
+
+  updateCaldaChocolate(){
+    if(this.caldaChocolate){
+      this.valorTela += (5*this.numPrato);
+    }
+    else{
+      this.valorTela -= (5*this.numPrato);
+    }
+  }
+
+  updateCaramelo(){
+    if(this.caramelo){
+      this.valorTela += (5*this.numPrato);
+    }
+    else{
+      this.valorTela -= (5*this.numPrato);
+    }
   }
 
 }
