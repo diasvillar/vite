@@ -35,8 +35,18 @@ export class ItemPage implements OnInit {
   sorvete: Boolean;
   caldaChocolate: Boolean;
   caramelo: Boolean;
+  camarao: Boolean;
+  carne: Boolean;
+  queijo: Boolean;
+  tradicional: Boolean;
+  multigrao: Boolean;
+  gorgonzola: Boolean;
+  chocolate: Boolean;
   valorTela: number;
   acrescimo: string = "Acrescimo:";
+  sabor: string = "Sabor:";
+  maxNo = false;
+  amt = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -204,6 +214,34 @@ export class ItemPage implements OnInit {
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Caramelo |";
       }
+      if(this.carne){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Carne |";
+      }
+      if(this.queijo){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Queijo |";
+      }
+      if(this.camarao){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Camarão com Requeijão |";
+      }
+      if(this.tradicional){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Tradicional |";
+      }
+      if(this.multigrao){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Multigrãos |";
+      }
+      if(this.gorgonzola){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Gorgonzola |";
+      }
+      if(this.chocolate){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Chocolate Belga |";
+      }
    }
    else{
       this.cart.valor_total = this.cart.valor_total*1 +  (this.pedido.cardapioGeral.preco * this.pedido.quantidade);
@@ -235,13 +273,43 @@ export class ItemPage implements OnInit {
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Caramelo |";
       }
+      if(this.carne){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Carne |";
+      }
+      if(this.queijo){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Queijo |";
+      }
+      if(this.camarao){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Camarão com Requeijão |";
+      }
+      if(this.tradicional){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Tradicional |";
+      }
+      if(this.multigrao){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Multigrãos |";
+      }
+      if(this.gorgonzola){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Gorgonzola |";
+      }
+      if(this.chocolate){
+        //this.cart.valor_total += (5*this.pedido.quantidade);
+        this.sabor += "| Chocolate Belga |";
+      }
     }
 
     if(this.leite || this.chantilly || this.nutella || this.doceLeite){
-      this.pedido.metodo = this.acrescimo
-    }else{ 
-      this.pedido.metodo = this.radioData;
-    }
+      this.pedido.metodo = this.acrescimo;
+    }else if(this.carne || this.queijo || this.camarao || this.chocolate || this.tradicional || this.multigrao || this.gorgonzola){
+            this.pedido.metodo = this.sabor;
+          }else{ 
+            this.pedido.metodo = this.radioData;
+          }
 
    if(this.cart.pedidos==null || this.cart.pedidos.length == 0){
 
@@ -261,7 +329,7 @@ export class ItemPage implements OnInit {
         if(this.pedido.cardapio  != null){
             this.cart.pedidos.forEach((cardapio) => {
               if(cardapio.cardapio != null){
-                if(cardapio.cardapio.id == this.pedido.cardapio.id && (cardapio.metodo == this.radioData || cardapio.metodo == this.acrescimo)){
+                if(cardapio.cardapio.id == this.pedido.cardapio.id && (cardapio.metodo == this.radioData || cardapio.metodo == this.acrescimo || cardapio.metodo == this.sabor)){
                   console.log("pedido já se encontra no carrinho");
                   flag=false;
                 }
@@ -274,7 +342,7 @@ export class ItemPage implements OnInit {
               if(cardapio.cardapio == null){
                 //console.log(JSON.stringify(cardapioGeral) + "\n\n");
                 
-                if(cardapio.cardapioGeral.id == this.pedido.cardapioGeral.id && (cardapio.metodo == this.radioData || cardapio.metodo == this.acrescimo)){
+                if(cardapio.cardapioGeral.id == this.pedido.cardapioGeral.id && (cardapio.metodo == this.radioData || cardapio.metodo == this.acrescimo || cardapio.metodo == this.sabor)){
                   console.log("pedido já se encontra no carrinho");
                   flag=false;
                 }    
@@ -424,6 +492,14 @@ export class ItemPage implements OnInit {
     else{
       this.valorTela -= (5*this.numPrato);
     }
+  }
+ 
+  onChange(isChecked: boolean) {
+    if (isChecked)
+      this.amt++
+    else 
+      this.amt--
+    this.amt === 2 ? this.maxNo = true : this.maxNo = false;
   }
 
 }

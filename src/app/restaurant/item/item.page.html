@@ -438,6 +438,54 @@
 			</div>
 
 
+			<div *ngIf="cardapioGeral.nome == 'Pastel'">
+				<p class="item-sub-title"><b>Escolha até 2 sabores</b></p>	
+				<ion-list class="list-itens" lines="none">
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="carne" [disabled]="!carne && maxNo" (ionChange)="onChange($event.target.checked)"></ion-checkbox>
+						<ion-label>Carne</ion-label>
+						<ion-note slot="end"></ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="queijo" [disabled]="!queijo && maxNo" (ionChange)="onChange($event.target.checked)"></ion-checkbox>
+						<ion-label>Queijo</ion-label>
+						<ion-note slot="end"></ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="camarao" [disabled]="!camarao && maxNo" (ionChange)="onChange($event.target.checked)"></ion-checkbox>
+						<ion-label>Camarão com Requeijão</ion-label>
+						<ion-note slot="end"></ion-note>
+					</ion-item>
+				</ion-list>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Mix de Pães de Queijo'">
+				<p class="item-sub-title"><b>Escolha até 2 sabores</b></p>	
+				<ion-list class="list-itens" lines="none">
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="tradicional" [disabled]="!tradicional && maxNo" (ionChange)="onChange($event.target.checked)"></ion-checkbox>
+						<ion-label>Tradicional</ion-label>
+						<ion-note slot="end"></ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="multigrao" [disabled]="!multigrao && maxNo" (ionChange)="onChange($event.target.checked)"></ion-checkbox>
+						<ion-label>Multigrãos</ion-label>
+						<ion-note slot="end"></ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="gorgonzola" [disabled]="!gorgonzola && maxNo" (ionChange)="onChange($event.target.checked)"></ion-checkbox>
+						<ion-label>Gorgonzola</ion-label>
+						<ion-note slot="end"></ion-note>
+					</ion-item>
+					<ion-item no-padding>
+						<ion-checkbox slot="start" color="success" [(ngModel)]="chocolate" [disabled]="!chocolate && maxNo" (ionChange)="onChange($event.target.checked)"></ion-checkbox>
+						<ion-label>Chocolate Belga</ion-label>
+						<ion-note slot="end"></ion-note>
+					</ion-item>
+				</ion-list>
+			</div>
+
+
 			<p class="item-sub-title"><b>Observações</b></p>
 			<ion-textarea [(ngModel)]="obs" name="observacao" placeholder="Deseja fazer alguma observação?"></ion-textarea>
 			<div class="add-item">
