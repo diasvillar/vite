@@ -208,58 +208,75 @@ export class RestaurantPage implements OnInit {
 	}
 
   selecionaCafe(cardapioCafe, restaurante){
-	console.log('Entrou na Action seleciona');
-	let navigationExtras: NavigationExtras = {
-		queryParams: {
-			"id" : restaurante.id,
-			"nome" : restaurante.nome,
-			"telefone" : restaurante.telefone,
-			"imgurl" : restaurante.imgurl,
-			"imgtopo" : restaurante.imgtopo,
-			"endereco" : restaurante.endereco,
-			"cardapioCafeId": cardapioCafe.id,
-			"cardapioCafeRestauranteId": cardapioCafe.restaurante_id,
-			"cardapioCafeCategoriaSuperior": cardapioCafe.categoria_superior,
-			"cardapioCafeDescricaoCategoria": cardapioCafe.descricao_categoria,
-			"cardapioCafeNome": cardapioCafe.nome,
-			"cardapioCafePreco": cardapioCafe.preco,
-			"cardapioCafeDescricaoSubCategoria": cardapioCafe.descricao_sub_categoria,
-			"tipo": 0
-		}
-	};
-	console.log(JSON.stringify(navigationExtras));
-	this.router.navigate(['/item'],  navigationExtras);
-	//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
-}
+		console.log('Entrou na Action seleciona');
+		let navigationExtras: NavigationExtras = {
+			queryParams: {
+				"id" : restaurante.id,
+				"nome" : restaurante.nome,
+				"telefone" : restaurante.telefone,
+				"imgurl" : restaurante.imgurl,
+				"imgtopo" : restaurante.imgtopo,
+				"endereco" : restaurante.endereco,
+				"cardapioCafeId": cardapioCafe.id,
+				"cardapioCafeRestauranteId": cardapioCafe.restaurante_id,
+				"cardapioCafeCategoriaSuperior": cardapioCafe.categoria_superior,
+				"cardapioCafeDescricaoCategoria": cardapioCafe.descricao_categoria,
+				"cardapioCafeNome": cardapioCafe.nome,
+				"cardapioCafePreco": cardapioCafe.preco,
+				"cardapioCafeDescricaoSubCategoria": cardapioCafe.descricao_sub_categoria,
+				"tipo": 0
+			}
+		};
+		console.log(JSON.stringify(navigationExtras));
+		this.router.navigate(['/item'],  navigationExtras);
+		//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+	}
 
   selecionaGeral(cardapioGeral, restaurante){
-	console.log('Entrou na Action seleciona');
-	let navigationExtras: NavigationExtras = {
-		queryParams: {
-			"id" : restaurante.id,
-			"nome" : restaurante.nome,
-			"telefone" : restaurante.telefone,
-			"imgurl" : restaurante.imgurl,
-			"imgtopo" : restaurante.imgtopo,
-			"endereco" : restaurante.endereco,
-			"cardapioGeralId": cardapioGeral.id,
-			"cardapioGeralRestauranteId": cardapioGeral.restaurante_id,
-			"cardapioGeralCategoria": cardapioGeral.categoria,
-			"cardapioGeralDescricao": cardapioGeral.descricao,
-			"cardapioGeralNome": cardapioGeral.nome,
-			"cardapioGeralPreco": cardapioGeral.preco,
-			"cardapioGeralImgUrl": cardapioGeral.img_url,
-			"cardapioGeralTempo": cardapioGeral.tempo,
-      "cardapioGeralTempoMin": cardapioGeral.tempo_min,
-			"cardapioGeralTempoMax": cardapioGeral.tempo_max,
-			"tipo": 1
-		}
-	};
-	console.log(JSON.stringify(navigationExtras));
-	this.router.navigate(['/item'],  navigationExtras);
-	//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
-}
+		console.log('Entrou na Action seleciona');
+		let navigationExtras: NavigationExtras = {
+			queryParams: {
+				"id" : restaurante.id,
+				"nome" : restaurante.nome,
+				"telefone" : restaurante.telefone,
+				"imgurl" : restaurante.imgurl,
+				"imgtopo" : restaurante.imgtopo,
+				"endereco" : restaurante.endereco,
+				"cardapioGeralId": cardapioGeral.id,
+				"cardapioGeralRestauranteId": cardapioGeral.restaurante_id,
+				"cardapioGeralCategoria": cardapioGeral.categoria,
+				"cardapioGeralDescricao": cardapioGeral.descricao,
+				"cardapioGeralNome": cardapioGeral.nome,
+				"cardapioGeralPreco": cardapioGeral.preco,
+				"cardapioGeralImgUrl": cardapioGeral.img_url,
+				"cardapioGeralTempo": cardapioGeral.tempo,
+				"cardapioGeralTempoMin": cardapioGeral.tempo_min,
+				"cardapioGeralTempoMax": cardapioGeral.tempo_max,
+				"tipo": 1
+			}
+		};
+		console.log(JSON.stringify(navigationExtras));
+		this.router.navigate(['/item'],  navigationExtras);
+		//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+	}
 
+	goToCart(restaurante){
+		console.log('Entrou na Action seleciona');
+		console.log("\n endereco: " + restaurante.endereco + "\n");
+		let navigationExtras: NavigationExtras = {
+						queryParams: {
+							"id" : restaurante.id,
+							"nome" : restaurante.nome,
+							"telefone" : restaurante.telefone,
+							"imgurl" : restaurante.imgurl,
+							"imgtopo" : restaurante.imgtopo,
+							"endereco" : restaurante.endereco
+						}
+			};
+			console.log(JSON.stringify(navigationExtras));
+			this.router.navigate(['/order-cart'],  navigationExtras);
+			//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+	}
 
   goToConfirmation(){
     this.navCtrl.navigateRoot('/tabs/(home:home)');

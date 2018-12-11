@@ -1,48 +1,58 @@
 <ion-content fullscreen>
 	<div class="header-buttons">
-		<ion-anchor href="/restaurant"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="seleciona(restaurante)"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
 		<a></a>
 	</div>
-	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<img src="{{restaurante.imgtopo}}" class="bg-image">
 	<div class="content">
 		<div class="page-header">Carrinho</div>
 		
-		<ion-list lines="none" class="item-list">
-			<ion-item no-padding>
-				<div class="info">
-					1x Pizza - Brie, Nozes e Mel
-					<div class="price">R$32,90</div>
-				</div>
-				<div slot="end">
-					<div class="component-quantity">
-						<div class="minus"><ion-icon name="f-minus"></ion-icon></div>
-						<div class="number">1</div>
-						<div class="plus"><ion-icon name="f-plus"></ion-icon></div>
+		<div *ngIf="cart.pedidos === null">
+			<ion-list lines="none" class="item-list">
+				<ion-item no-padding>
+					<div class="info">
+						Seu carrinho está vazio
 					</div>
-				</div>
-			</ion-item>
-			<ion-item no-padding>
-				<div class="info">
-					1x Pizza - Jámon, Rúcula e Feta
-					<div class="price">R$32,90</div>
-				</div>
-				<div slot="end">
-					<div class="component-quantity">
-						<div class="minus"><ion-icon name="f-minus"></ion-icon></div>
-						<div class="number">1</div>
-						<div class="plus"><ion-icon name="f-plus"></ion-icon></div>
+				</ion-item>
+			</ion-list>
+			<div class="total">
+				Valor total<br>
+				<span class="price">R$ -</span>
+			</div>
+		</div>
+
+		<div *ngIf="cart.pedidos !== null">
+			<ion-list lines="none" class="item-list">
+				<ion-item no-padding *ngFor="let pedido of cart.pedidos; let i = index;">
+					<div class="info">
+						<div *ngIf="pedido.cardapio != null" (click)="selecionaCafe(pedido.cardapio, restaurante)">
+							 {{pedido.cardapio.nome}}
+							<p *ngIf='pedido.metodo != ""'>Obs: {{pedido.metodo}}</p>
+						</div>
+						<div *ngIf="pedido.cardapio == null" (click)="selecionaGeral(pedido.cardapioGeral, restaurante)">
+							 {{pedido.cardapioGeral.nome}}
+							<p *ngIf='pedido.metodo != ""'>Obs: {{pedido.metodo}}</p>
+						</div>
 					</div>
-				</div>
-			</ion-item>
-		</ion-list>
-		<div class="total">
-			Valor total<br>
-			<span class="price">R$ 72,80</span>
+					<div slot="end">
+						<div class="component-quantity">
+							<div class="minus"><ion-icon name="f-minus" (click)="decreaseQuantity(i)"></ion-icon></div>
+							<div class="number">{{pedido.quantidade}}</div>
+							<div class="plus"><ion-icon name="f-plus" (click)="increaseQuantity(i)"></ion-icon></div>
+						</div>
+					</div>
+				</ion-item>
+			</ion-list>
+		
+			<div class="total">
+				Valor total<br>
+				<span class="price">R${{cart.valor_total}}</span>
+			</div>
 		</div>
 
 		<div class="footer-buttons">
-			<ion-button color="medium">Limpar Carrinho</ion-button>
-			<ion-button href="/order-end" color="primary">Finalizar Pedido</ion-button>
+			<ion-button color="medium" (click)="clearCart()">Limpar Carrinho</ion-button>
+			<ion-button (click)="goToEndOrder(restaurante)" [disabled]="cart.pedidos === null"  color="primary">Finalizar Pedido</ion-button>
 		</div>
 	</div>
 </ion-content>

@@ -1,7 +1,7 @@
 <ion-content fullscreen>
 	<div class="header-buttons">
 		<ion-anchor href="/tabs"><ion-icon src="assets/images/x-icon.svg"></ion-icon></ion-anchor>
-		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="goToCart(restaurante)"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
 	</div>
 	<img src="{{restaurante.imgtopo}}" class="bg-image">
 	<div class="content">

@@ -7,6 +7,7 @@ export class Pedido{
         public cardapioGeral: CardapioGeral,
         public quantidade: number,
         public metodo: string,
-        public observacao: string
+        public observacao: string,
+        public acrescimoTotal: number
     ){}
 }

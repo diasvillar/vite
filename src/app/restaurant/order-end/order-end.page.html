@@ -1,35 +1,66 @@
 <ion-content fullscreen>
 	<div class="header-buttons">
-		<ion-anchor href="/restaurant"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
-		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="seleciona(restaurante)"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="goToCart(restaurante)"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
 	</div>
-	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<img src="{{restaurante.imgtopo}}" class="bg-image">
 	<div class="content">
 		<div class="page-header">Finalizar Pedido</div>
+
+		<div *ngIf="cart.pedidos === null">
+				<ion-list lines="none" class="item-list">
+					<ion-item no-padding>
+						<div class="info">
+							Seu carrinho está vazio
+						</div>
+					</ion-item>
+				</ion-list>
+				<ion-list class="list-toppings" lines="none">
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success"></ion-radio>
+							<ion-label>Consumir no Local</ion-label>
+							<ion-note slot="end" class="total">Valor Total</ion-note>
+						</ion-item>
+						<ion-item no-padding>
+							<ion-radio slot="start" color="success"></ion-radio>
+							<ion-label>Pedido para Viagem</ion-label>
+							<ion-note slot="end" class="price">R$ - </ion-note>
+						</ion-item>
+				</ion-list>
+		</div>
 		
-		<ion-list class="list-itens" lines="none">
-			<ion-item no-padding>
-				<ion-label>1x Pizza - Brie, Nozes e Mel</ion-label>
-				<ion-note slot="end">R$32,90</ion-note>
-			</ion-item>
-			<ion-item no-padding>
-				<ion-label>1x Pizza - Jámon, Rúcula e Feta</ion-label>
-				<ion-note slot="end">R$39,90</ion-note>
-			</ion-item>
-		</ion-list>
-		<ion-list class="list-toppings" lines="none">
-			<ion-item no-padding>
-				<ion-radio slot="start" color="success"></ion-radio>
-				<ion-label>Consumir no Local</ion-label>
-				<ion-note slot="end" class="total">Valor Total</ion-note>
-			</ion-item>
-			<ion-item no-padding>
-				<ion-radio slot="start" color="success"></ion-radio>
-				<ion-label>Pedido para Viagem</ion-label>
-				<ion-note slot="end" class="price">R$72,80</ion-note>
-			</ion-item>
-		</ion-list>
-		
+		<div *ngIf="cart.pedidos !== null">
+				<ion-list class="list-itens" lines="none">
+					<ion-item no-padding *ngFor="let pedido of cart.pedidos; let i = index; ">
+									
+						<div *ngIf="pedido.cardapio != null">
+							<ion-label>{{pedido.quantidade}}x {{pedido.cardapio.nome}}</ion-label>
+						</div>
+						<div *ngIf="pedido.cardapio == null">
+							<ion-label>{{pedido.quantidade}}x {{pedido.cardapioGeral.nome}}</ion-label>					
+						</div>
+						<ion-note slot="end" *ngIf="pedido.cardapio != null">R${{(pedido.quantidade*pedido.cardapio.preco) + (pedido.quantidade*pedido.acrescimoTotal)}}</ion-note>
+						<ion-note slot="end" *ngIf="pedido.cardapio == null">R${{(pedido.quantidade*pedido.cardapioGeral.preco) + (pedido.quantidade*pedido.acrescimoTotal)}}</ion-note>
+					</ion-item>
+				</ion-list>
+				<div *ngIf="cart.pedidos != null">
+					<ion-list class="list-toppings" lines="none" >
+						<ion-radio-group name="consumo" ngDefaultControl [(ngModel)]="retiradaData">
+							<ion-item no-padding>
+								<ion-radio slot="start" color="success" name="consumo" value="Consumir no Local" checked></ion-radio>
+								<ion-label>Consumir no Local</ion-label>
+								<ion-note slot="end" class="total">Valor Total</ion-note>
+							</ion-item>
+							<ion-item no-padding>
+								<ion-radio slot="start" color="success" name="consumo" value="Pedido para Viagem"></ion-radio>
+								<ion-label>Pedido para Viagem</ion-label>
+								<ion-note slot="end" class="price">R${{cart.valor_total}}</ion-note>
+							</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+		</div>
+				
 		<div class="delivery-time">
 			<ion-icon name="f-clock"></ion-icon>
 			<div>
@@ -38,18 +69,20 @@
 		</div>
 		<div class="input-time">
 			<ion-datetime
-			display-format="DD/MMM HH:mm"
-			picker-format="DD/MMM HH:mm"
-			month-short-names="JAN, FEV, MAR, ABR, MAI, JUN, JUL, AGO, SET, OUT, NOV, DEZ"
-			placeholder="Data/hora para Retirada"
-			minuteValues="0,10,20,30,40,50"
-			cancel-text="Cancelar"
-			done-text="OK"
+				display-format="DD/MMM HH:mm"
+				picker-format="DD/MMM HH:mm"
+				month-short-names="JAN, FEV, MAR, ABR, MAI, JUN, JUL, AGO, SET, OUT, NOV, DEZ"
+				placeholder="Data/hora para Retirada"
+				minuteValues="0,10,20,30,40,50"
+				max="20:30"
+				cancel-text="Cancelar"
+				done-text="OK"
+				[(ngModel)]="isoDate"
 			></ion-datetime>
 		</div>
 		<div class="footer-buttons">
-			<ion-button href="/restaurant" color="medium">Continuar Pedindo</ion-button>
-			<ion-button href="/cards-list" color="primary">Finalizar Pedido</ion-button>
+			<ion-button (click)="seleciona(restaurante)" color="medium">Continuar Pedindo</ion-button>
+			<ion-button (click)="checkout()" color="primary">Finalizar Pedido</ion-button>
 		</div>
 	</div>
 </ion-content>

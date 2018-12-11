@@ -123,10 +123,11 @@ export class ItemPage implements OnInit {
       }
     });
     //this.radioData = "Coca-Cola";
-    this.pedido = new Pedido(null,null,null,null,null);
+    this.pedido = new Pedido(null,null,null,null,null,null);
     this.cart = new Cart(null,null,null,null,null,null,null,null,null);
     this.pedido.cardapio = this.cardapioCafe;
     this.pedido.cardapioGeral = this.cardapioGeral;
+    this.pedido.acrescimoTotal = 0;
     this.numPrato = 1;
        
   }
@@ -167,7 +168,25 @@ export class ItemPage implements OnInit {
 		this.router.navigate(['/restaurant'],  navigationExtras);
 		//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
   }
-  
+
+  goToCart(restaurante){
+		console.log('Entrou na Action seleciona');
+		console.log("\n endereco: " + restaurante.endereco + "\n");
+		let navigationExtras: NavigationExtras = {
+						queryParams: {
+							"id" : restaurante.id,
+							"nome" : restaurante.nome,
+							"telefone" : restaurante.telefone,
+							"imgurl" : restaurante.imgurl,
+							"imgtopo" : restaurante.imgtopo,
+							"endereco" : restaurante.endereco
+						}
+			};
+			console.log(JSON.stringify(navigationExtras));
+			this.router.navigate(['/order-cart'],  navigationExtras);
+			//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+  }
+   
   addCart(){
     if(sessionStorage.getItem('cart')){
      // console.log(sessionStorage.getItem('cart'))
@@ -189,30 +208,37 @@ export class ItemPage implements OnInit {
       if(this.leite){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Leite |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.chantilly){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Chantilly |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.nutella){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Nutella |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.doceLeite){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Doce de Leite |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.sorvete){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Sorvete |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.caldaChocolate){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Calda de Chocolate |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.caramelo){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Caramelo |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.carne){
         //this.cart.valor_total += (5*this.pedido.quantidade);
@@ -248,30 +274,37 @@ export class ItemPage implements OnInit {
       if(this.leite){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Leite |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.chantilly){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Chantilly |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.nutella){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Nutella |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.doceLeite){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Doce de Leite |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.sorvete){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Sorvete |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.caldaChocolate){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Calda de Chocolate |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.caramelo){
         this.cart.valor_total += (5*this.pedido.quantidade);
         this.acrescimo += "| Caramelo |";
+        this.pedido.acrescimoTotal += 5;
       }
       if(this.carne){
         //this.cart.valor_total += (5*this.pedido.quantidade);
@@ -303,7 +336,7 @@ export class ItemPage implements OnInit {
       }
     }
 
-    if(this.leite || this.chantilly || this.nutella || this.doceLeite){
+    if(this.leite || this.chantilly || this.nutella || this.doceLeite || this.sorvete || this.caramelo || this.caldaChocolate ){
       this.pedido.metodo = this.acrescimo;
     }else if(this.carne || this.queijo || this.camarao || this.chocolate || this.tradicional || this.multigrao || this.gorgonzola){
             this.pedido.metodo = this.sabor;
@@ -360,8 +393,32 @@ export class ItemPage implements OnInit {
         //console.log("radioData: " + this.radioData + "\n\n");
         console.log(sessionStorage.getItem('cart'));
       }
-      this.seleciona(this.restaurante);
+      
   }
+
+  addAndGo(){
+    this.addCart();
+    this.seleciona(this.restaurante);
+  }
+
+  goToEndOrder(restaurante){
+		console.log('Entrou na Action seleciona');
+		console.log("\n endereco: " + restaurante.endereco + "\n");
+		let navigationExtras: NavigationExtras = {
+						queryParams: {
+							"id" : restaurante.id,
+							"nome" : restaurante.nome,
+							"telefone" : restaurante.telefone,
+							"imgurl" : restaurante.imgurl,
+							"imgtopo" : restaurante.imgtopo,
+							"endereco" : restaurante.endereco
+						}
+			};
+      console.log(JSON.stringify(navigationExtras));
+      this.addCart();
+			this.router.navigate(['/order-end'],  navigationExtras);
+			//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+	}
   
   increaseQuantity(index) {
     this.numPrato += 1;
