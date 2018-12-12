@@ -1,9 +1,9 @@
 <ion-content fullscreen>
 	<div class="header-buttons">
-		<ion-anchor href="/order-end"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
-		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="seleciona(restaurante)"><ion-icon src="assets/images/arrow-back.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="goToCart(restaurante)"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
 	</div>
-	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<img src="{{restaurante.imgtopo}}" class="bg-image">
 	<div class="content">
 		<div class="page-header">Fechar conta</div>
 		
@@ -21,7 +21,9 @@
 		<ion-button color="medium" fill="clear" href="new-card">Cadastrar novo cartão</ion-button>
 
 		<div class="footer-buttons">
-			<ion-button href="/order-confirmed" color="primary">Finalizar Pedido</ion-button>
+			<ion-button (click)="submit()"  color="primary">Finalizar Pedido</ion-button>
 		</div>
 	</div>
 </ion-content>
+
+<!--href="/order-confirmed"-->

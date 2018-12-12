@@ -22,18 +22,18 @@ export class RestaurantPage implements OnInit {
 	categorias :any[];
   pedido: number = 0;
 	public restaurante: Restaurante;
-  public url: string;
-  public urlGeral: string;
-  public urlCategoria: string;
-  public cardapiosCafe: CardapioCafe[];
+	public url: string;
+	public urlGeral: string;
+	public urlCategoria: string;
+	public cardapiosCafe: CardapioCafe[];
 	public cardapiosGeral: CardapioGeral[];
 	public loading: any;
 	
 	constructor(
 		public navCtrl: NavController,
-    private _http: Http,
-    private _loadingCtrl: LoadingController,
-    private _alertCtrl: AlertController,
+		private _http: Http,
+		private _loadingCtrl: LoadingController,
+		private _alertCtrl: AlertController,
 		private route: ActivatedRoute,
 		private router: Router
 	) { 

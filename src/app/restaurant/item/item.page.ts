@@ -128,6 +128,7 @@ export class ItemPage implements OnInit {
     this.pedido.cardapio = this.cardapioCafe;
     this.pedido.cardapioGeral = this.cardapioGeral;
     this.pedido.acrescimoTotal = 0;
+    this.obs = "";
     this.numPrato = 1;
        
   }
