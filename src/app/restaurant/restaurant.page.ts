@@ -20,7 +20,7 @@ export class RestaurantPage implements OnInit {
 	itens : any[] = [,,,,,,,,];
 
 	categorias :any[];
-  pedido: number = 0;
+  	pedido: number = 0;
 	public restaurante: Restaurante;
 	public url: string;
 	public urlGeral: string;

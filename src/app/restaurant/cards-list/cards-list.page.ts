@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import { Http } from '@angular/http';
+import { map } from 'rxjs/operators';
 
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
 import { Restaurante } from '../../../domain/restaurante/restaurante';
+import { Cpagamento } from '../../../domain/cpagamento/cpagamento';
 
 
 import * as $ from "jquery";
@@ -16,12 +19,16 @@ import * as $ from "jquery";
 export class CardsListPage implements OnInit {
 
   public restaurante: Restaurante;
+  //public cPagamento : Cpagamento;
+  public cPagamentos: Cpagamento[];
+  public radioData: number;
 
   constructor(
     public navCtrl: NavController,
     private route: ActivatedRoute,
     public _alertCtrl: AlertController,
     private router: Router,
+    private _http: Http
   ) { 
 
     this.route.queryParams.subscribe(params => {
@@ -34,13 +41,33 @@ export class CardsListPage implements OnInit {
       this.restaurante.endereco = params["endereco"];      
     });
 
+    //this.cPagamento = new Cpagamento(null,null,null,null,null,null,null);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     if(sessionStorage.getItem('flagLogado')!= "sim"){
       this.goToLogin();
     }
+
+    var link = 'https://viniciusvillar.000webhostapp.com/vite/page/get_card/'+sessionStorage.getItem('usuarioId');
+
+    await this._http
+			  .get(link)
+			  .pipe(map(res => res.json()))
+			  .toPromise()
+			  .then( cPagamentos => {
+
+          this.cPagamentos = cPagamentos;
+
+          console.log("##### IMPRESSÃO DO CARTÃO: " + JSON.stringify(this.cPagamentos) + "\n\n\n");
+        
+			  } )
+			  .catch(err => {
+				  console.log(err);
+				  this.presentFailAlert();
+
+			  });
 
   }
 
@@ -70,6 +97,24 @@ export class CardsListPage implements OnInit {
 			this.router.navigate(['/order-cart'],  navigationExtras);
 			//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
   }
+
+  newCard(restaurante){
+		console.log('Entrou na Action seleciona');
+		console.log("\n endereco: " + restaurante.endereco + "\n");
+		let navigationExtras: NavigationExtras = {
+						queryParams: {
+							"id" : restaurante.id,
+							"nome" : restaurante.nome,
+							"telefone" : restaurante.telefone,
+							"imgurl" : restaurante.imgurl,
+							"imgtopo" : restaurante.imgtopo,
+							"endereco" : restaurante.endereco
+						}
+			};
+			console.log(JSON.stringify(navigationExtras));
+			this.router.navigate(['/new-card'],  navigationExtras);
+			//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+  }
   
   seleciona(restaurante){
 		console.log('Entrou na Action seleciona');
@@ -89,6 +134,10 @@ export class CardsListPage implements OnInit {
 		//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
   }
 
+  submit2(){
+    console.log("radioData: " + this.radioData + "\n\n");
+  }
+
   submit(){
 
     /* let loader = this._loadingCtrl.create({
@@ -100,13 +149,21 @@ export class CardsListPage implements OnInit {
      var bill_itemsAmout = new Array ();
 
      //Variáveis para gerar conta e efetuar pagamento
-     var payment_method_code = "credit_card";
+     var payment_method_code = this.cPagamentos[this.radioData].payment_method_code;//"credit_card";
      //var payment_company_code = this.radioData;
-     var payment_company_code = "mastercard";//this.radioData;
+     if(this.cPagamentos[this.radioData].payment_company_code == "americanExpress"){
+      var payment_company_code = "american_express";
+     }else if(this.cPagamentos[this.radioData].payment_company_code == "dinersClub"){
+              var payment_company_code = "diners_club";
+            }else{
+              var payment_company_code = this.cPagamentos[this.radioData].payment_company_code;
+            }
+     
 
      //Variáveis para GETUSER, POSTUSER
      var nameUser = sessionStorage.getItem('usuarioName');
      var emailUser = sessionStorage.getItem('usuarioLogado');
+     var idUser = sessionStorage.getItem('usuarioId');
      var jsonDataUser;
      var customer_id;
      var dataPostUser = JSON.stringify({name: nameUser, email: emailUser});
@@ -124,13 +181,13 @@ export class CardsListPage implements OnInit {
      var bill_items = new Array();
      var dataPostBill;
      //var holder_name = this.pagamento.holder_name;
-     var holder_name = "Ana Karolina T Fernandes"//this.pagamento.holder_name;
+     var holder_name = this.cPagamentos[this.radioData].holder_name;//"Ana Karolina T Fernandes"//this.pagamento.holder_name;
      //var card_cvv = this.pagamento.card_cvv;
-     var card_cvv = "123";//this.pagamento.card_cvv;
+     var card_cvv = this.cPagamentos[this.radioData].card_cvv;//"123";//this.pagamento.card_cvv;
      //var card_expiration =  this.pagamento.card_expiration.substring(5) + "/" + this.pagamento.card_expiration.substring(2,4);
-     var card_expiration =  "12/23";//this.pagamento.card_expiration.substring(5) + "/" + this.pagamento.card_expiration.substring(2,4);
+     var card_expiration =  this.cPagamentos[this.radioData].card_expiration;//"12/23";//this.pagamento.card_expiration.substring(5) + "/" + this.pagamento.card_expiration.substring(2,4);
      //var card_number = this.pagamento.card_number; //5555 5555 5555 5557
-     var card_number = "5555555555555557"//this.pagamento.card_number;
+     var card_number = this.cPagamentos[this.radioData].card_number;//"5555555555555557"//this.pagamento.card_number;
      var jsonDataBills;
      
      //Variáveis para o e-mail de confirmação
