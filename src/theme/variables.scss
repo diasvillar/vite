@@ -278,7 +278,7 @@
 			margin-right: -20px;
 			margin-bottom: 1rem;
 			ion-segment {
-				margin-left: 20px;
+				justify-content: flex-start;
 			}
 		}
 	}
@@ -323,6 +323,17 @@
 			align-items: center;
 			display: flex;
 			justify-content: center;
+		}
+	}
+}
+
+.ios {
+	ion-segment {
+		margin-top: 10px;
+		margin-right: 20px;
+		ion-segment-button {
+			--padding-start: 10px;
+			--padding-end: 10px;
 		}
 	}
 }
