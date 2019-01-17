@@ -110,7 +110,8 @@ export class RestaurantPage implements OnInit {
 			  } )
 			  .catch(err => {
 				 console.log(err);
-				 this.loading.dismiss();
+				 if (this.loading != undefined)
+				 	this.loading.dismiss();
 				 this.presentFailAlert();
 				 this.goToConfirmation();
 			  });

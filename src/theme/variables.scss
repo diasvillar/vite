@@ -332,8 +332,17 @@
 		margin-top: 10px;
 		margin-right: 20px;
 		ion-segment-button {
+			color: var(--ion-color-medium);
+			border-radius: 0px;
+			border: 0px;
 			--padding-start: 10px;
 			--padding-end: 10px;
+			--padding-bottom: 7px;
+			&.segment-button-checked {
+				background: transparent;
+				border-bottom: 2px solid var(--ion-color-primary);
+				color: var(--ion-color-primary);
+			}
 		}
 	}
 }
