@@ -1,7 +1,7 @@
 <ion-content padding>
 	<div class="profile">
-		<img [src]="'assets/images/avatar.png'" class="avatar">
-		<div class="name">Amanda Oliveira</div>
+		<img [src]="'assets/images/user2.png'" class="avatar">
+		<div class="name">{{nameUser}}</div>
 	</div>
 	<ion-list lines="none">
 		<ion-item button href="/history" no-padding>
@@ -12,7 +12,7 @@
 			<ion-label>Meus Cartões</ion-label>
 			<ion-icon slot="start" name="f-credit-card"></ion-icon>
 		</ion-item>
-		<ion-item button href="/config" no-padding>
+		<ion-item button (click)="presentFailAlert()" no-padding> <!--href="/config"-->
 			<ion-label>Configurações</ion-label>
 			<ion-icon slot="start" name="f-settings"></ion-icon>
 		</ion-item>

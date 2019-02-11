@@ -1,22 +1,30 @@
 <ion-content fullscreen>
 	<div class="header-buttons">
-		<ion-anchor href="/tabs"><ion-icon src="assets/images/x-icon.svg"></ion-icon></ion-anchor>
-		<ion-anchor href="/order-cart"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="seleciona(restaurante)"><ion-icon src="assets/images/x-icon.svg"></ion-icon></ion-anchor>
+		<ion-anchor (click)="goToCart(restaurante)"><ion-icon src="assets/images/ic_cart.svg"></ion-icon></ion-anchor>
 	</div>
-	<img src="assets/images/bg-restaurant.png" class="bg-image">
+	<img src="{{restaurante.imgtopo}}" class="bg-image">
 	<div class="content">
 		<div class="item-title">
-			<div class="page-header">Jahu Pizza Napolitana</div>
-			<ion-anchor href="/restaurant" class="item-button">
+			<div class="page-header">{{restaurante.nome}}</div>
+			<ion-anchor (click)="seleciona(restaurante)" class="item-button">
 				<ion-icon name="f-x-circle"></ion-icon>
 			</ion-anchor>
 		</div>
-		<div class="page-sub-header">Rua Ramiro Barcelos, 83.</div>
+		<div class="page-sub-header">{{restaurante.endereco}}</div>
 		<h5>Sobre</h5>
-		<div class="text">
+		<div class="text" *ngIf="restaurante.id == 1">
 			<p>Com um ambiente arquitetônico moderno, o Octavio Café Faria Lima, a primeira unidade do Octavio Café e maior cafeteria de toda a América Latina, tornou-se um templo para os amantes de café especial contando com uma premiada equipe de baristas dedicados que são responsáveis por criar blends exclusivos e personalizados. </p>
 			<p>Possui um cardápio amplo, que contempla opções de café da manhã, almoço, petiscos e janta.</p>
 			<p>O Octávio Café é um lugar especial, muito mais que uma cafeteria, um ambiente que proporciona a possibilidade de se vivenciar uma experiência única, ideal desde reuniões de negócios até o happy hour.</p>
+		</div>
+
+		<div class="text" *ngIf="restaurante.id == 2">
+			<p>Com um ambiente arquitetônico moderno, o Octavio Café Cidade Jardim, mais nova unidade Octavio Café em São Paulo conta com um cardápio diversificado, com itens que vão desde seus cafés especiais e métodos de preparo até pratos, sanduíches e doces.</p>
+		</div>
+
+		<div class="text" *ngIf="restaurante.id == 3">
+			<p>Com um ambiente arquitetônico moderno e relaxante, o Octavio Café Eldorado conta com um cardápio diversificado, com itens que vão desde seus cafés especiais e métodos de preparo até pratos, sanduíches e doces.</p>
 		</div>
 	</div>
 </ion-content>

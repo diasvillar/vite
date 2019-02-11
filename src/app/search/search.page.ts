@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController} from '@ionic/angular';
 
 @Component({
 	selector: 'app-search',
@@ -9,9 +10,13 @@ export class SearchPage implements OnInit {
 	
 	restaurants = [,,,];
 
-	constructor() { }
+	constructor(
+		public navCtrl: NavController
+	) { }
 	
-	ngOnInit() { }
+	ngOnInit() {
+		this.navCtrl.navigateRoot('/tabs/(home:home)');
+	 }
 
 	search(val : string) {
 		console.log(val);

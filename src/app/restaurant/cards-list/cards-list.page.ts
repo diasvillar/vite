@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController, Radio } from '@ionic/angular';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 
@@ -9,6 +9,7 @@ import { Cpagamento } from '../../../domain/cpagamento/cpagamento';
 
 
 import * as $ from "jquery";
+import { TouchSequence } from 'selenium-webdriver';
 
 
 @Component({
@@ -19,7 +20,6 @@ import * as $ from "jquery";
 export class CardsListPage implements OnInit {
 
   public restaurante: Restaurante;
-  //public cPagamento : Cpagamento;
   public cPagamentos: Cpagamento[];
   public radioData: number;
 
@@ -32,7 +32,7 @@ export class CardsListPage implements OnInit {
   ) { 
 
     this.route.queryParams.subscribe(params => {
-      this.restaurante = new Restaurante(null, null, null, null, null, null);
+      this.restaurante = new Restaurante(null, null, null, null, null, null, null);
       this.restaurante.id = params["id"];
       this.restaurante.nome = params ["nome"];
       this.restaurante.telefone = params["telefone"];
@@ -41,7 +41,6 @@ export class CardsListPage implements OnInit {
       this.restaurante.endereco = params["endereco"];      
     });
 
-    //this.cPagamento = new Cpagamento(null,null,null,null,null,null,null);
   }
 
   async ngOnInit() {
@@ -59,14 +58,11 @@ export class CardsListPage implements OnInit {
 			  .then( cPagamentos => {
 
           this.cPagamentos = cPagamentos;
-
           console.log("##### IMPRESSÃO DO CARTÃO: " + JSON.stringify(this.cPagamentos) + "\n\n\n");
         
 			  } )
 			  .catch(err => {
 				  console.log(err);
-				  this.presentFailAlert();
-
 			  });
 
   }
@@ -81,7 +77,6 @@ export class CardsListPage implements OnInit {
   }
 
   goToCart(restaurante){
-		console.log('Entrou na Action seleciona');
 		console.log("\n endereco: " + restaurante.endereco + "\n");
 		let navigationExtras: NavigationExtras = {
 						queryParams: {
@@ -96,6 +91,38 @@ export class CardsListPage implements OnInit {
 			console.log(JSON.stringify(navigationExtras));
 			this.router.navigate(['/order-cart'],  navigationExtras);
 			//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
+  }
+
+  goToConfirmation(restaurante){
+    
+    let navigationExtras: NavigationExtras = {
+						queryParams: {
+							"id" : restaurante.id,
+							"nome" : restaurante.nome,
+							"telefone" : restaurante.telefone,
+							"imgurl" : restaurante.imgurl,
+							"imgtopo" : restaurante.imgtopo,
+							"endereco" : restaurante.endereco
+						}
+			};
+			console.log(JSON.stringify(navigationExtras));
+			this.router.navigate(['/order-confirmed'],  navigationExtras);
+  }
+
+  goToFail(restaurante){
+
+		let navigationExtras: NavigationExtras = {
+						queryParams: {
+							"id" : restaurante.id,
+							"nome" : restaurante.nome,
+							"telefone" : restaurante.telefone,
+							"imgurl" : restaurante.imgurl,
+							"imgtopo" : restaurante.imgtopo,
+							"endereco" : restaurante.endereco
+						}
+			};
+			console.log(JSON.stringify(navigationExtras));
+			this.router.navigate(['/order-failed'],  navigationExtras);
   }
 
   newCard(restaurante){
@@ -132,10 +159,6 @@ export class CardsListPage implements OnInit {
 		console.log(JSON.stringify(navigationExtras));
 		this.router.navigate(['/order-end'],  navigationExtras);
 		//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
-  }
-
-  submit2(){
-    console.log("radioData: " + this.radioData + "\n\n");
   }
 
   submit(){
@@ -321,7 +344,16 @@ export class CardsListPage implements OnInit {
                 bill_items.push(new Object({product_id: bill_itemsID[x], amount: bill_itemsAmout[x]}));
 
                }
+               this.cart = JSON.parse(sessionStorage.getItem('cart'));
                
+               var acrescimoFinalVindi = 0;
+               for(var acr = 0; acr<this.cart.pedidos.length; acr++){
+                  acrescimoFinalVindi += parseInt(this.cart.pedidos[acr]["acrescimoTotal"]);
+               }
+
+               bill_items.push(new Object({product_id: 16329, amount: acrescimoFinalVindi}));
+               bill_items.push(new Object({product_id: 16330, amount: this.cart.dezPorCento}));
+              
                dataPostBill = JSON.stringify({customer_id: customer_id, payment_method_code: payment_method_code, bill_items: bill_items , holder_name: holder_name, card_expiration: card_expiration, card_number: card_number, card_cvv: card_cvv, payment_company_code: payment_company_code});
                console.log(dataPostBill);
                //POST Da FATURA #######################################################################
@@ -585,21 +617,25 @@ export class CardsListPage implements OnInit {
          //loader.dismiss();
          if(confirmation == true){
 
-           this.presentSucesso();
+           //this.presentSucesso();
 
            this.clearCart();
+
+           this.goToConfirmation(this.restaurante);
 
          }
          else{
 
-           this.presentFailAlert();
+           //this.presentFailAlert();
+
+           this.goToFail(this.restaurante);
 
          }
 
 
  }
 
- async presentSucesso() {
+/* async presentSucesso() {
     const alert = await this._alertCtrl.create({
       header: "Sucesso.\n",
       message: 'Pedido cadastrado!',
@@ -617,6 +653,6 @@ export class CardsListPage implements OnInit {
     });
 
     await alert.present();
-  }
+  }*/
 
 }

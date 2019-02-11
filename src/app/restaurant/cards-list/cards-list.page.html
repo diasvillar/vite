@@ -23,8 +23,12 @@
 		</div>
 		<ion-button color="medium" fill="clear" (click)="newCard(restaurante)">Cadastrar novo cartão</ion-button>
 
-		<div class="footer-buttons">
+		<div class="footer-buttons" *ngIf="radioData != undifined" >
 			<ion-button (click)="submit()"  color="primary">Finalizar Pedido</ion-button>
+		</div>
+
+		<div class="footer-buttons" *ngIf="radioData == undifined">
+			<ion-button color="medium">Finalizar Pedido</ion-button>
 		</div>
 	</div>
 </ion-content>

@@ -16,6 +16,7 @@ export class OrderEndPage implements OnInit {
   public restaurante: Restaurante;
   public cart: Cart;
   public retiradaData: string;
+  public dezPorCento: string;
   public isoDate: any;
   public isoDateMin: any;
   public valorView : number;
@@ -43,7 +44,7 @@ export class OrderEndPage implements OnInit {
   { 
 
     this.route.queryParams.subscribe(params => {
-      this.restaurante = new Restaurante(null, null, null, null, null, null);
+      this.restaurante = new Restaurante(null, null, null, null, null, null, null);
       this.restaurante.id = params["id"];
       this.restaurante.nome = params ["nome"];
       this.restaurante.telefone = params["telefone"];
@@ -52,19 +53,18 @@ export class OrderEndPage implements OnInit {
       this.restaurante.endereco = params["endereco"];      
     });
 
-    this.cart = new Cart(null,null,null,null,null,null,null,null,null);
+    this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
     this.http = http;
     this.data = {};
     this.data.response = '';
     this.url = "https://viniciusvillar.000webhostapp.com/vite/page/cadastrar_pedido_ionic_cart";
     this.retiradaData = "Consumir no Local";
+    this.dezPorCento = "Sim";
     
     var date = new Date(); // Or the date you'd like converted.
     this.isoDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
     this.isoDateMin = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
     this.isoCurrentDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
-    
-        
     
   }
 
@@ -145,6 +145,12 @@ export class OrderEndPage implements OnInit {
 
   checkout(){
     this.cart.horario = this.isoDate;
+    if(this.dezPorCento == "Sim"){
+      this.cart.dezPorCento = parseFloat((this.cart.valor_total*0.10).toFixed(2));
+    }
+    else{
+      this.cart.dezPorCento = 0;
+    }
     sessionStorage.setItem("cart", JSON.stringify(this.cart));
     
     if(this.isoDate < this.isoDateMin.toISOString()){
@@ -222,27 +228,28 @@ export class OrderEndPage implements OnInit {
                         }
                       }
                     }
-                  }
+                  
 
-                  if(this.cart.pedidos[i].cardapioGeral.tempo_min == "16:00"){
+                    if(this.cart.pedidos[i].cardapioGeral.tempo_min == "16:00"){
 
-                    var pedidoDate = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(0,2);
-                    var pedidoDateMin = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(3,5);
-                    
-                    if(+auxDate < +pedidoDate){
-                      console.log("Entrou aqui pq a hora é inferior as 16:00. \n\n\n");
-                      this.verifica = true;
+                      var pedidoDate = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(0,2);
+                      var pedidoDateMin = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(3,5);
+                      
+                      if(+auxDate < +pedidoDate){
+                        console.log("Entrou aqui pq a hora é inferior as 16:00. \n\n\n");
+                        this.verifica = true;
+                      }
                     }
-                  }
 
-                  if(this.cart.pedidos[i].cardapioGeral.tempo_min == "12:00"){
+                    if(this.cart.pedidos[i].cardapioGeral.tempo_min == "12:00"){
 
-                    var pedidoDate = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(0,2);
-                    var pedidoDateMin = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(3,5);
-                    
-                    if(+auxDate < +pedidoDate){
-                      console.log("Entrou aqui pq a hora é inferior as 12:00. \n\n\n");
-                      this.verifica = true;
+                      var pedidoDate = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(0,2);
+                      var pedidoDateMin = this.cart.pedidos[i].cardapioGeral.tempo_min.substring(3,5);
+                      
+                      if(+auxDate < +pedidoDate){
+                        console.log("Entrou aqui pq a hora é inferior as 12:00. \n\n\n");
+                        this.verifica = true;
+                      }
                     }
                   }
 

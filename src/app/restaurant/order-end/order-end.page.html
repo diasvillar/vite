@@ -43,30 +43,46 @@
 						<ion-note slot="end" *ngIf="pedido.cardapio == null">R${{(pedido.quantidade*pedido.cardapioGeral.preco) + (pedido.quantidade*pedido.acrescimoTotal)}}</ion-note>
 					</ion-item>
 				</ion-list>
+				
+				<div>
+					<p class="item-sub-title"><b>Você aceita pagar os 10%?</b></p>
+					<ion-list class="list-toppings" lines="none" >
+							<ion-radio-group name="consumo" ngDefaultControl [(ngModel)]="dezPorCento">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" name="dez" value="Sim" checked></ion-radio>
+									<ion-label>Sim</ion-label>
+									<ion-note slot="end" class="total">Valor Total</ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" name="dez" value="Não"></ion-radio>
+									<ion-label>Não</ion-label>
+									<ion-note *ngIf="dezPorCento == 'Sim'" slot="end" class="price">R${{cart.valor_total + cart.valor_total*0.1}}</ion-note>
+									<ion-note *ngIf="dezPorCento != 'Sim'" slot="end" class="price">R${{cart.valor_total}}</ion-note>
+								</ion-item>
+							</ion-radio-group>
+					</ion-list>
+				</div>
+
 				<div *ngIf="cart.pedidos != null">
+					<p class="item-sub-title"><b>Como será o consumo?</b></p>
 					<ion-list class="list-toppings" lines="none" >
 						<ion-radio-group name="consumo" ngDefaultControl [(ngModel)]="retiradaData">
 							<ion-item no-padding>
 								<ion-radio slot="start" color="success" name="consumo" value="Consumir no Local" checked></ion-radio>
 								<ion-label>Consumir no Local</ion-label>
-								<ion-note slot="end" class="total">Valor Total</ion-note>
+								
 							</ion-item>
 							<ion-item no-padding>
 								<ion-radio slot="start" color="success" name="consumo" value="Pedido para Viagem"></ion-radio>
 								<ion-label>Pedido para Viagem</ion-label>
-								<ion-note slot="end" class="price">R${{cart.valor_total}}</ion-note>
+								
 							</ion-item>
 						</ion-radio-group>
 					</ion-list>
 				</div>
 		</div>
 				
-		<div class="delivery-time">
-			<ion-icon name="f-clock"></ion-icon>
-			<div>
-				Informe o horário de retirada<br> para deixarmos tudo pronto para você.
-			</div>
-		</div>
+		<p class="item-sub-title"><b>Qual o horário da sua chegada?</b></p>
 		<div class="input-time">
 			<ion-datetime
 				display-format="DD/MMM HH:mm"

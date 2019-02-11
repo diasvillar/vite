@@ -25,7 +25,7 @@ export class OrderCartPage implements OnInit {
     ) {
 
       this.route.queryParams.subscribe(params => {
-        this.restaurante = new Restaurante(null, null, null, null, null, null);
+        this.restaurante = new Restaurante(null, null, null, null, null, null, null);
         this.restaurante.id = params["id"];
         this.restaurante.nome = params ["nome"];
         this.restaurante.telefone = params["telefone"];
@@ -33,7 +33,7 @@ export class OrderCartPage implements OnInit {
         this.restaurante.imgtopo = params["imgtopo"];
         this.restaurante.endereco = params["endereco"];      
       });
-      this.cart = new Cart(null,null,null,null,null,null,null,null,null);
+      this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
     }
 
   ngOnInit() {

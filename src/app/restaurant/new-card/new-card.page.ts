@@ -28,7 +28,7 @@ export class NewCardPage implements OnInit {
   ) { 
 
     this.route.queryParams.subscribe(params => {
-      this.restaurante = new Restaurante(null, null, null, null, null, null);
+      this.restaurante = new Restaurante(null, null, null, null, null, null, null);
       this.restaurante.id = params["id"];
       this.restaurante.nome = params ["nome"];
       this.restaurante.telefone = params["telefone"];
@@ -37,7 +37,7 @@ export class NewCardPage implements OnInit {
       this.restaurante.endereco = params["endereco"];      
     });
 
-    this.cPagamento = new Cpagamento(null,null,null,null,null,null,null);
+    this.cPagamento = new Cpagamento(null,null,null,null,null,null,null,null);
     this.data={};
     this.data.response = '';
     this.http = http;
@@ -123,7 +123,7 @@ export class NewCardPage implements OnInit {
         this.http.post(link, data)
         .subscribe(data =>{
           this.data.response = data._body;
-          if (this.data.response [0] == "sucesso"){
+          if (this.data.response == "sucesso"){
             
            this.presentAlert();
  

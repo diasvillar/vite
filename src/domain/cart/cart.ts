@@ -11,6 +11,7 @@ export class Cart{
         //public observacao: string,
         public metodo: string,
         public retirada: string,
-        public horario: string
+        public horario: string,
+        public dezPorCento: number
     ){}
 }

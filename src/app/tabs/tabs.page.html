@@ -2,12 +2,12 @@
 	<ion-tab tab="home">
 		<ion-router-outlet name="home"></ion-router-outlet>
 	</ion-tab>
-	<ion-tab tab="search">
+	<!--<ion-tab tab="search">
 		<ion-router-outlet name="search"></ion-router-outlet>
-	</ion-tab>
-	<ion-tab tab="cart">
+	</ion-tab>-->
+	<!--<ion-tab tab="cart">
 		<ion-router-outlet name="cart"></ion-router-outlet>
-	</ion-tab>
+	</ion-tab>-->
 	<ion-tab tab="menu">
 		<ion-router-outlet name="menu"></ion-router-outlet>
 	</ion-tab>
@@ -16,12 +16,12 @@
 		<ion-tab-button tab="home" href="/tabs/(home:home)">
 			<ion-icon name="f-home"></ion-icon>
 		</ion-tab-button>
-		<ion-tab-button tab="search" href="/tabs/(search:search)">
+		<ion-tab-button tab="search" (click)="presentFailAlert()"> <!--<ion-tab-button tab="search" href="/tabs/(search:search)">-->
 			<ion-icon name="f-search"></ion-icon>
 		</ion-tab-button>
-		<ion-tab-button tab="cart" href="/tabs/(cart:cart)">
+		<!--<ion-tab-button tab="cart" href="/tabs/(cart:cart)">
 			<ion-icon name="f-shopping-cart"></ion-icon>
-		</ion-tab-button>
+		</ion-tab-button>-->
 		<ion-tab-button tab="menu" href="/tabs/(menu:menu)">
 			<ion-icon name="f-menu"></ion-icon>
 		</ion-tab-button>

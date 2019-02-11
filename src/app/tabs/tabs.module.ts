@@ -8,8 +8,8 @@ import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
 import { HomePageModule } from '../home/home.module';
-import { SearchPageModule } from '../search/search.module';
-import { CartPageModule } from '../cart/cart.module';
+//import { SearchPageModule } from '../search/search.module';
+//import { CartPageModule } from '../cart/cart.module';
 import { MenuPageModule } from '../menu/menu.module';
 
 @NgModule({
@@ -19,8 +19,8 @@ import { MenuPageModule } from '../menu/menu.module';
 		FormsModule,
 		TabsPageRoutingModule,
 		HomePageModule,
-		SearchPageModule,
-		CartPageModule,
+		//SearchPageModule,
+		//CartPageModule,
 		MenuPageModule
 	],
 	declarations: [TabsPage]

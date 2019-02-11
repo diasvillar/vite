@@ -5,7 +5,8 @@ export class Restaurante{
         public telefone: string,
         public imgurl: string,
         public imgtopo: string,
-        public endereco: string
+        public endereco: string,
+        public ativo: boolean
     ){}
 
 }

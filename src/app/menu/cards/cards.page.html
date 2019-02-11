@@ -7,20 +7,20 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content padding fullscreen>
+<ion-content padding >
     <ion-list class="card-list">
-        <ion-item no-padding>
+        <ion-item no-padding *ngFor="let cPagamento of cPagamentos; let i=index;">
             <ion-label>
                 <span class="value">Número do Cartão</span>
-                <span class="desc">****.****.****.8989</span>
+                <span class="desc">****.****.****.{{cPagamento.card_number.substring(cPagamento.card_number.length-4,cPagamento.card_number.length)}}</span>
                 <span class="value">Tipo do Cartão</span>
-                <span class="desc">Cartão de Crédito</span>
+                <span *ngIf="cPagamento.payment_method_code == 'credit_card'" class="desc">Cartão de Crédito</span>
                 <span class="value">Vencimento</span>
-                <span class="desc">12/2020</span>
+                <span class="desc">{{cPagamento.card_expiration}}</span>
             </ion-label>
-            <ion-icon slot="start" src="assets/images/mastercard.svg"></ion-icon>
-            <ion-button (click)="edit()" fill="clear"><ion-icon slot="end" src="f-edit-2" color="dark"></ion-icon></ion-button>
-            <ion-button (click)="remove()" fill="clear"><ion-icon slot="end" src="f-trash-2" color="danger"></ion-icon></ion-button>
+            <ion-icon slot="start" src="assets/images/{{cPagamento.payment_company_code}}.svg"></ion-icon>
+            <!--<ion-button (click)="edit()" fill="clear"><ion-icon slot="end" src="assets/feather/md-f-edit-2.svg" color="dark"></ion-icon></ion-button>-->
+            <ion-button (click)="remove(cPagamento.id, i)" fill="clear"><ion-icon slot="end" src="assets/feather/md-f-trash-2.svg" color="danger"></ion-icon></ion-button>
         </ion-item>
     </ion-list>
     <ion-button color="medium" fill="clear" (click)="edit()">Cadastrar novo cartão</ion-button>

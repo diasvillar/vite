@@ -83,6 +83,7 @@
 	ion-input, ion-textarea, ion-datetime {
 		color: var(--ion-color-dark);
 		--placeholder-color: var(--ion-color-medium-shade);
+		//--placeholder-color:red;
 		font-size: 14px;
 		border: 1px solid var(--ion-color-light-tint);
 		border-radius: 2px;
@@ -118,7 +119,7 @@
 	}
 
 	.custom-form-access {
-		ion-input {
+		ion-input, ion-datetime {
 			--background: #fff;
 			height: 48px;
 			color: var(--ion-color-dark);
@@ -212,6 +213,13 @@
 				border-radius: 15px;
 				overflow: hidden;
 			}
+			.image-bw {
+				width: 100%;
+				box-shadow: 0 5px 16px rgba(0, 0, 0, .12);
+				border-radius: 15px;
+				overflow: hidden;
+				filter: grayscale(5);
+			}
 			.restaurant-content {
 				justify-content: space-between;
 				display: flex;
@@ -219,6 +227,12 @@
 				.info {
 					.name {
 						color: var(--ion-color-primary);
+						font-size: 18px;
+						font-weight: bold;
+						margin-bottom: 0.4rem;
+					}
+					.name-bw {
+						color: var(--ion-color-medium);
 						font-size: 18px;
 						font-weight: bold;
 						margin-bottom: 0.4rem;

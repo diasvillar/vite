@@ -1,6 +1,6 @@
 export class Cpagamento{
     constructor(
-
+        public id: number,
         public idUser: number,
         public payment_method_code : string,
         public payment_company_code : string,

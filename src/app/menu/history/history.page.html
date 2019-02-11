@@ -7,19 +7,22 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content padding fullscreen>
-	<ion-list class="history-list">
-		<ion-item button no-padding (click)="details()">
+<ion-content padding >
+	<ion-list *ngFor='let cart of carts; let i = index;' class="history-list">
+		<ion-item button no-padding (click)="details(cart.status)">
 			<div class="info">
 				<div class="date">
-					<span class="day">12</span>
-					<span>OUT</span>
+					<span class="day">{{day[i]}}</span>
+					<span>{{month[i]}}</span>
 				</div>
 				<div class="history-content">
-					<div class="title">Comp Snack Bar</div>
-					<div class="item">1x Pizza - Brie, Nozes e Mel</div>
+					<div class="title">Octavio Café - Eldorado</div>
+					<div *ngFor='let pedido of cart.pedidos'>
+						<div class="item" *ngIf="pedido.cardapio != null">{{pedido.quantidade}}x {{pedido.cardapio.nome}}</div>
+						<div class="item" *ngIf="pedido.cardapio == null">{{pedido.quantidade}}x {{pedido.cardapioGeral.nome}}</div>
+					</div>
 					<div class="value">Valor total</div>
-					<div class="price">R$72,80</div>
+					<div class="price">R${{cart.valor_total + cart.dezPorCento}}</div>
 				</div>
 			</div>
 		</ion-item>

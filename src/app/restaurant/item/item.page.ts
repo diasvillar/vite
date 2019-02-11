@@ -56,7 +56,7 @@ export class ItemPage implements OnInit {
     //http: Http, 
     ) { 
     this.route.queryParams.subscribe(params => {
-			this.restaurante = new Restaurante(null, null, null, null, null, null);
+			this.restaurante = new Restaurante(null, null, null, null, null, null, null);
 			this.restaurante.id = params["id"];
 			this.restaurante.nome = params ["nome"];
 			this.restaurante.telefone = params["telefone"];
@@ -124,7 +124,8 @@ export class ItemPage implements OnInit {
     });
     //this.radioData = "Coca-Cola";
     this.pedido = new Pedido(null,null,null,null,null,null);
-    this.cart = new Cart(null,null,null,null,null,null,null,null,null);
+    this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
+    this.cart.id = this.restaurante.id;
     this.pedido.cardapio = this.cardapioCafe;
     this.pedido.cardapioGeral = this.cardapioGeral;
     this.pedido.acrescimoTotal = 0;
@@ -195,7 +196,7 @@ export class ItemPage implements OnInit {
 
       if(!this.pedidos){
         console.log("Entrou no If 0")
-        this.cart = new Cart(null,null,null,null,null,null,null,null,null);
+        this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
       }
     }
     else{

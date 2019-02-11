@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'order-end', loadChildren: './restaurant/order-end/order-end.module#OrderEndPageModule' },
   { path: 'cards-list', loadChildren: './restaurant/cards-list/cards-list.module#CardsListPageModule' },
   { path: 'new-card', loadChildren: './restaurant/new-card/new-card.module#NewCardPageModule' },
-  { path: 'order-confirmed', loadChildren: './restaurant/order-confirmed/order-confirmed.module#OrderConfirmedPageModule' }
+  { path: 'order-confirmed', loadChildren: './restaurant/order-confirmed/order-confirmed.module#OrderConfirmedPageModule' },
+  { path: 'order-failed', loadChildren: './restaurant/order-failed/order-failed.module#OrderFailedPageModule' }
 ];
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],

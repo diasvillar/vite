@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
-import { SearchPage } from '../search/search.page';
-import { CartPage } from '../cart/cart.page';
+//import { SearchPage } from '../search/search.page';
+//import { CartPage } from '../cart/cart.page';
 import { MenuPage } from '../menu/menu.page';
 
 const routes: Routes = [
@@ -20,7 +20,7 @@ const routes: Routes = [
 				path: 'home',
 				outlet: 'home',
 				component: HomePage
-			}, {
+			},/* {
 				path: 'search',
 				outlet: 'search',
 				component: SearchPage
@@ -28,7 +28,7 @@ const routes: Routes = [
 				path: 'cart',
 				outlet: 'cart',
 				component: CartPage
-			}, {
+			},*/ {
 				path: 'menu',
 				outlet: 'menu',
 				component: MenuPage

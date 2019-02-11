@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController, NavParams } from '@ionic/angular';
 
 @Component({
 	selector: 'app-history-details',
@@ -6,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./history-details.page.scss'],
 })
 export class HistoryDetailsPage implements OnInit {
+
+	public history: string = this.navParams.get('history');
 	
-	constructor() { }
+	constructor(
+		public navCtrl: NavController, 
+		public navParams : NavParams
+	) { }
 	
-	ngOnInit() { }
+	ngOnInit() {
+
+		console.log("history: " + this.history["status"] + "\n");
+	 }
 	
 }

@@ -82,11 +82,11 @@
 					<div class="number">{{numPrato}}</div>
 					<div class="plus"><ion-icon name="f-plus" (click)="increaseQuantity(numPrato)"></ion-icon></div>
 				</div>
-				<ion-button color="primary" shape="round" fill="outline" size="small" (click)="addCart()">Adicionar</ion-button>
+				<ion-button color="primary" shape="round" fill="outline" size="small" (click)="addAndGo()">Adicionar</ion-button>
 			</div>
 			<div class="footer-buttons">
 				<ion-button (click)="seleciona(restaurante)" color="medium">Continuar Pedindo</ion-button>
-				<ion-button href="/order-end" color="primary">Finalizar Pedido</ion-button>
+				<ion-button (click)="goToEndOrder(restaurante)" color="primary">Finalizar Pedido</ion-button>
 			</div>
 		</div>
 	</div>
@@ -99,6 +99,7 @@
 				<div class="item-price">R${{valorTela}}</div>
 			</div>
 			<p class="item-desc">{{cardapioGeral.descricao}}</p>
+			<p class="item-desc-time">*Horário de pedido entre {{cardapioGeral.tempo_min}} e {{cardapioGeral.tempo_max}}</p>
 			
 			<div *ngIf="cardapioGeral.nome == 'Refrigerantes' ">
 				<p class="item-sub-title"><b>Refrigerante</b></p>	

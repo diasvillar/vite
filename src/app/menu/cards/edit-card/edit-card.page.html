@@ -2,28 +2,33 @@
 	<div class="page-header">Cadastrar novo cartão</div>
 	<ion-list lines="none">
 		<ion-item no-padding>
-			<ion-input placeholder="Número do Cartão"></ion-input>
+			<ion-input placeholder="Número do Cartão" [(ngModel)]="cPagamento.card_number" name="card_number" maxlength="16" required></ion-input>
 		</ion-item>
 		<ion-item no-padding>
-			<ion-input placeholder="Nome do Titular"></ion-input>
+			<ion-input placeholder="Nome do Titular" [(ngModel)]="cPagamento.holder_name" name="holder_name" required></ion-input>
 		</ion-item>
-		<ion-item no-padding>
+		<!--<ion-item no-padding>
 			<ion-input placeholder="CPF"></ion-input>
-		</ion-item>
+		</ion-item>-->
 		<ion-item no-padding>
 			<ion-grid no-padding>
 				<ion-row justify-content-between>
 					<ion-col size="7" no-padding>
-						<ion-input placeholder="Vencimento"></ion-input>
+						<ion-input placeholder="Vencimento" [(ngModel)]="cPagamento.card_expiration" name="card_expiration" required></ion-input>
 					</ion-col>
 					<ion-col size="5" no-padding>
-						<ion-input placeholder="CSV"></ion-input>
+						<ion-input placeholder="CSV" type="number" min="1" max="9999" [(ngModel)]="cPagamento.card_cvv"  name="card_cvv" required></ion-input>
 					</ion-col>
 				</ion-row>
 			</ion-grid>
 		</ion-item>
 	</ion-list>
-	<div class="footer-buttons">
-		<ion-button color="primary">Finalizar Pedido</ion-button>
+	
+	<div class="footer-buttons" *ngIf="cPagamento.card_number != null && cPagamento.holder_name != null && cPagamento.card_expiration != null && cPagamento.card_cvv != null">
+		<ion-button (click)="cadastrarCPagamento()" color="primary">Cadastrar</ion-button>
+	</div>
+
+	<div class="footer-buttons" *ngIf="cPagamento.card_number == null || cPagamento.holder_name == null || cPagamento.card_expiration == null || cPagamento.card_cvv == null">
+		<ion-button color="medium">Cadastrar</ion-button> <!--href="/cards-list"-->
 	</div>
 </ion-content>

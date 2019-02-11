@@ -1,12 +1,24 @@
 <ion-content padding>
 	<div class="page-header">Resturantes</div>
 	<ion-list class="list-restaurants" lines="none">
-		<ion-anchor no-padding *ngFor="let restaurante of restaurantes" (click)="seleciona(restaurante)">
-			<div class="restaurant">
+		<ion-anchor no-padding *ngFor="let restaurante of restaurantes" >
+			<div class="restaurant" *ngIf="restaurante.ativo != 0" (click)="seleciona(restaurante)">
 				<img src="{{ restaurante.imgurl }}" class="image">
 				<div class="restaurant-content">
 					<div class="info">
 						<div class="name">{{restaurante.nome}}</div>
+						<div class="address">{{restaurante.endereco}}</div>
+					</div>
+					<div class="price">$$$</div>
+				</div>
+			</div>
+		</ion-anchor>
+		<ion-anchor no-padding *ngFor="let restaurante of restaurantes" >
+			<div class="restaurant" *ngIf="restaurante.ativo == 0" (click)="presentAlert()">
+				<img src="{{ restaurante.imgurl }}" class="image-bw">
+				<div class="restaurant-content">
+					<div class="info">
+						<div class="name-bw">{{restaurante.nome}}</div>
 						<div class="address">{{restaurante.endereco}}</div>
 					</div>
 					<div class="price">$$$</div>

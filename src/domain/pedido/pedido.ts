@@ -8,6 +8,6 @@ export class Pedido{
         public quantidade: number,
         public metodo: string,
         public observacao: string,
-        public acrescimoTotal: number
+        public acrescimoTotal: number,
     ){}
 }
