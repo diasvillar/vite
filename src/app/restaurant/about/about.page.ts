@@ -12,10 +12,12 @@ import { Restaurante } from '../../../domain/restaurante/restaurante';
 export class AboutPage implements OnInit {
 
   public restaurante: Restaurante;
+  public loading: any;
 
   constructor(
     private route: ActivatedRoute,
     public navCtrl: NavController,
+    private _loadingCtrl: LoadingController,
 		private router: Router
   ) { 
     this.route.queryParams.subscribe(params => {
@@ -29,10 +31,21 @@ export class AboutPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+ async ngOnInit() {
+    
+    await this.presentLoading();
+
     if(sessionStorage.getItem('flagLogado')!="sim"){
 			this.goToLogin();
-		}
+    }
+    await this.loading.dismiss();
+  }
+
+  async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
   }
 
   goToLogin(){

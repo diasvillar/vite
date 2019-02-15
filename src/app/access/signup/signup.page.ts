@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { Http } from '@angular/http';
 
 import { Usuario } from '../../../domain/usuario/usuario';
@@ -16,10 +16,12 @@ export class SignupPage implements OnInit {
   public data;
   public http;
   public usuario: Usuario;
+  public loading: any;
 
   constructor(
     public navCtrl: NavController,
     private _alertCtrl: AlertController,
+    private _loadingCtrl: LoadingController,
     http: Http) {
 
       this.data = {};
@@ -32,7 +34,9 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
 
-  submit(){
+  async submit(){
+
+    await this.presentLoading();
 
      var link = 'https://viniciusvillar.000webhostapp.com/vite/page/cadastrar_usuario_ionic';
      var data = JSON.stringify({nome: this.usuario.nome, email: this.usuario.email, password: this.usuario.password});
@@ -66,8 +70,17 @@ export class SignupPage implements OnInit {
      else{
        this.presentPasswordFailAlert();
      }
+
+     await this.loading.dismiss();
  
    }
+
+   async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
+  }
 
    async presentAlert() {
     const alert = await this._alertCtrl.create({

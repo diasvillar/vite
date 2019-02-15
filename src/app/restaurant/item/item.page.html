@@ -212,8 +212,8 @@
 									<ion-note slot="end"></ion-note>
 								</ion-item>
 								<ion-item no-padding>
-									<ion-radio slot="start" color="success" id="leiteD" type="radio" name="chocolate" value="Leite Desnatadpo"></ion-radio>
-									<ion-label>Leite Desnatadpo</ion-label>
+									<ion-radio slot="start" color="success" id="leiteD" type="radio" name="chocolate" value="Leite Desnatado"></ion-radio>
+									<ion-label>Leite Desnatado</ion-label>
 									<ion-note slot="end"></ion-note>
 								</ion-item>
 								<ion-item no-padding>
@@ -369,6 +369,26 @@
 								<ion-item no-padding>
 									<ion-radio slot="start" color="success" id="queijo" type="radio" name="petisco" value="Queijo Brie, Geléia e Amêndoas"></ion-radio>
 									<ion-label>Queijo Brie, Geléia e Amêndoas</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+						</ion-radio-group>
+					</ion-list>
+				</div>
+			</div>
+
+			<div *ngIf="cardapioGeral.nome == 'Tapioca' ">
+				<p class="item-sub-title"><b>Recheio</b></p>	
+				<div class="cc-selector">		
+					<ion-list class="list-itens" lines="none">
+						<ion-radio-group name="cafedamanha" ngDefaultControl [(ngModel)]="radioData">
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="queijoM" type="radio" name="cafedamanha" value="Queijo Minas Frescal e Tomate" checked></ion-radio>
+									<ion-label>Queijo Minas Frescal e Tomate</ion-label>
+									<ion-note slot="end"></ion-note>
+								</ion-item>
+								<ion-item no-padding>
+									<ion-radio slot="start" color="success" id="peru" type="radio" name="cafedamanha" value="Peito de Peru e Queijo Minas Padrão"></ion-radio>
+									<ion-label>Peito de Peru e Queijo Minas Padrão</ion-label>
 									<ion-note slot="end"></ion-note>
 								</ion-item>
 						</ion-radio-group>

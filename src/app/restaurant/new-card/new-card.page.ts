@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { Http } from '@angular/http';
 
 import { Restaurante } from '../../../domain/restaurante/restaurante';
@@ -18,11 +18,13 @@ export class NewCardPage implements OnInit {
   public cPagamento : Cpagamento;
   public data;
   public http;
+  public loading: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public navCtrl: NavController,
+    private _loadingCtrl: LoadingController,
     private _alertCtrl: AlertController,
     http: Http
   ) { 
@@ -104,7 +106,22 @@ export class NewCardPage implements OnInit {
 		//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
   }
 
-  cadastrarCPagamento(){
+  async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
+  }
+
+  async cadastrarCPagamento(){
+
+    await this.presentLoading();
+
+    if(this.cPagamento.card_expiration[4] == "-"){
+
+      this.cPagamento.card_expiration = this.cPagamento.card_expiration[5] + this.cPagamento.card_expiration[6] + "/" + this.cPagamento.card_expiration[2] + this.cPagamento.card_expiration[3];
+
+    }
 
       var link = 'https://viniciusvillar.000webhostapp.com/vite/page/cadastrar_c_pagamento';
       var data = JSON.stringify(
@@ -134,6 +151,8 @@ export class NewCardPage implements OnInit {
           this.presentFailAlert();
  
         });
+
+        await this.loading.dismiss();
       }
 
       async presentAlert() {

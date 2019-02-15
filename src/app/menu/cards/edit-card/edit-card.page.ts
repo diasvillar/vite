@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Cpagamento } from '../../../../domain/cpagamento/cpagamento';
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
-import { ModalController, NavController, AlertController } from '@ionic/angular';
+import { ModalController, NavController, LoadingController, AlertController } from '@ionic/angular';
 import { Http } from '@angular/http';
 
 @Component({
@@ -13,14 +13,16 @@ export class EditCardPage implements OnInit {
 	
 	@Input() card: any;
 	public cPagamento : Cpagamento;
-  	public data;
-  	public http;
+  public data;
+	public http;
+	public loading: any;
 
 	constructor(
 		private modalCtrl: ModalController,
 		private route: ActivatedRoute,
 		private router: Router,
 		public navCtrl: NavController,
+		private _loadingCtrl: LoadingController,
 		private _alertCtrl: AlertController,
 		http: Http
 	) { 
@@ -54,7 +56,22 @@ export class EditCardPage implements OnInit {
 		 return false;
 	 }
 
-	 cadastrarCPagamento(){
+	 async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
+  }
+
+	 async cadastrarCPagamento(){
+
+		await this.presentLoading();
+
+		if(this.cPagamento.card_expiration[4] == "-"){
+
+      this.cPagamento.card_expiration = this.cPagamento.card_expiration[5] + this.cPagamento.card_expiration[6] + "/" + this.cPagamento.card_expiration[2] + this.cPagamento.card_expiration[3];
+
+    }
 
 		var link = 'https://viniciusvillar.000webhostapp.com/vite/page/cadastrar_c_pagamento';
 		var data = JSON.stringify(
@@ -83,7 +100,8 @@ export class EditCardPage implements OnInit {
 					this.presentFailAlert();
 					this.modalCtrl.dismiss();
    
-		  });
+			});
+			await this.loading.dismiss();
 		}
   
 		async presentAlert() {

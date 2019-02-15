@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { Http } from '@angular/http'
+import { map } from 'rxjs/operators';
 
 import { Restaurante } from '../../../domain/restaurante/restaurante';
 import { Cart } from '../../../domain/cart/cart';
@@ -17,6 +18,9 @@ export class OrderEndPage implements OnInit {
   public cart: Cart;
   public retiradaData: string;
   public dezPorCento: string;
+  public cupomDesc: string;
+  public cupom1: string;
+  public cupom2: string;
   public isoDate: any;
   public isoDateMin: any;
   public valorView : number;
@@ -26,6 +30,7 @@ export class OrderEndPage implements OnInit {
   public data;
   public http;
   public url: string;
+  public loading: any;
   
 
   public hora7: any = new Date("1970-01-01T07:00:00.000Z").toISOString();
@@ -38,6 +43,7 @@ export class OrderEndPage implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       public navCtrl: NavController,
+      private _loadingCtrl: LoadingController,
       http: Http, 
       public _alertCtrl: AlertController
   ) 
@@ -53,13 +59,14 @@ export class OrderEndPage implements OnInit {
       this.restaurante.endereco = params["endereco"];      
     });
 
-    this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
+    this.cart = new Cart(null,null,null,null,null,null,null,null,null,null,null,null);
     this.http = http;
     this.data = {};
     this.data.response = '';
     this.url = "https://viniciusvillar.000webhostapp.com/vite/page/cadastrar_pedido_ionic_cart";
     this.retiradaData = "Consumir no Local";
     this.dezPorCento = "Sim";
+    this.cupomDesc = "";
     
     var date = new Date(); // Or the date you'd like converted.
     this.isoDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
@@ -68,15 +75,37 @@ export class OrderEndPage implements OnInit {
     
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    await this.presentLoading();
+
+    if(sessionStorage.getItem('flagLogado')!="sim"){
+      this.goToLogin();
+    }
+
+    var link = 'https://viniciusvillar.000webhostapp.com/vite/page/get_cupom/'+ sessionStorage.getItem('usuarioId');
+
+    await this.http
+			  .get(link)
+			  .pipe(map((res:Response) => res.json()))
+			  .toPromise()
+			  .then( cupons => {
+
+          for(var x=0; x<cupons.length; x++){
+            this.cupom1 = cupons[x].cupom1;
+            this.cupom2 = cupons[x].cupom2;
+          }
+        
+			  } )
+			  .catch(err => {
+				  console.log(err);
+			  });
 
     console.log(sessionStorage.getItem('usuarioId'));
     console.log(sessionStorage.getItem('usuarioName'));
     console.log(sessionStorage.getItem('usuarioLogado'));
 
-    if(sessionStorage.getItem('flagLogado')!="sim"){
-      this.goToLogin();
-    }
+    
     if(sessionStorage.getItem('cart')){
       //console.log(sessionStorage.getItem('cart'))
       this.cart = JSON.parse(sessionStorage.getItem('cart'));
@@ -87,6 +116,15 @@ export class OrderEndPage implements OnInit {
     else{
       console.log("Carrinho vazio");
     } 
+
+    await this.loading.dismiss();
+  }
+
+  async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
   }
 
   goToLogin(){
@@ -141,9 +179,12 @@ export class OrderEndPage implements OnInit {
 			console.log(JSON.stringify(navigationExtras));
 			this.router.navigate(['/cards-list'],  navigationExtras);
 			//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
-	}
+  }
+  
+  verificaFinal(){
 
-  checkout(){
+    console.log("this.cupomDesc " + this.cupomDesc + "\n");
+
     this.cart.horario = this.isoDate;
     if(this.dezPorCento == "Sim"){
       this.cart.dezPorCento = parseFloat((this.cart.valor_total*0.10).toFixed(2));
@@ -151,7 +192,43 @@ export class OrderEndPage implements OnInit {
     else{
       this.cart.dezPorCento = 0;
     }
-    sessionStorage.setItem("cart", JSON.stringify(this.cart));
+
+    if(this.cupomDesc != ""){
+
+      if(this.cupomDesc == "VITEAPP10"){
+        if(this.cupom1 == null){
+          this.cart.cupomDesc = parseFloat((this.cart.valor_total*0.10).toFixed(2));
+          sessionStorage.setItem("cart", JSON.stringify(this.cart));
+          this.desconto10(this.cart.cupomDesc, this.cart.valor_total, this.cart.dezPorCento);
+          this.checkout();
+        }
+        else{
+          this.cupomUtilizado();
+        }
+      }
+      else if(this.cupomDesc == "OBRIGADA20"){
+        if(this.cupom2 == null){
+          this.cart.cupomDesc = parseFloat((this.cart.valor_total*0.20).toFixed(2));
+          sessionStorage.setItem("cart", JSON.stringify(this.cart));
+          this.desconto20(this.cart.cupomDesc, this.cart.valor_total, this.cart.dezPorCento);
+          this.checkout();
+        }
+        else{
+          this.cupomUtilizado();
+        }
+      }
+      else{
+        this.cupomInexistente();
+      }
+    }
+    else{
+      this.cart.cupomDesc = 0;
+      sessionStorage.setItem("cart", JSON.stringify(this.cart));
+      this.checkout();
+    }
+  }
+
+  async checkout(){
     
     if(this.isoDate < this.isoDateMin.toISOString()){
       console.log("Entrou aqui pq a hora é anterior a atual \n\n\n");
@@ -273,6 +350,9 @@ export class OrderEndPage implements OnInit {
                       this.cart.retirada = this.retiradaData;
                       var data = JSON.stringify(this.cart);  
                       console.log(data)
+
+                      await this.presentLoading();
+
                       this.http.post(this.url, data)
                         .subscribe(data => {
                             this.data.response = data._body;
@@ -281,6 +361,7 @@ export class OrderEndPage implements OnInit {
                             console.log("Oooops!");
                             this.presentFailAlert6();
                         });
+                        await this.loading.dismiss();
                         this.verifica = false;
                         //this.navCtrl.push(PagamentoPage, { restauranteSelecionado: this.restaurante });
                         this.goToPayment(this.restaurante);
@@ -296,6 +377,9 @@ export class OrderEndPage implements OnInit {
                       this.cart.retirada = this.retiradaData;
                       var data = JSON.stringify(this.cart);  
                       console.log(data)
+
+                      await this.presentLoading();
+
                       this.http.post(this.url, data)
                         .subscribe(data => {
                             this.data.response = data._body;
@@ -303,6 +387,7 @@ export class OrderEndPage implements OnInit {
                             console.log("Oooops!");
                             this.presentFailAlert6();
                         });
+                        await this.loading.dismiss();
                         this.verifica = false;
                         this.goToPayment(this.restaurante);
                         //this.navCtrl.push(PagamentoPage, { restauranteSelecionado: this.restaurante });
@@ -328,6 +413,48 @@ export class OrderEndPage implements OnInit {
     const alert = await this._alertCtrl.create({
       header: "Horário inferior ao atual.",
       message: 'Por favor, atualize o horário de chegada.',
+      buttons: [{ text: 'Ok!' }]
+    });
+
+    await alert.present();
+  }
+
+  async cupomUtilizado() {
+    const alert = await this._alertCtrl.create({
+      header: "Esse cupom já foi utilizado por essa conta.",
+      message: 'Por favor, tente outro cupom.',
+      buttons: [{ text: 'Ok!' }]
+    });
+
+    await alert.present();
+  }
+
+  async cupomInexistente(){
+    const alert = await this._alertCtrl.create({
+      header: "Esse cupom não existe.",
+      message: 'Por favor, tente outro cupom.',
+      buttons: [{ text: 'Ok!' }]
+    });
+
+    await alert.present();
+  }
+
+  async desconto10(cupomDesc, valor_total, dezPorCento) {
+    var valorFinal = valor_total + dezPorCento - cupomDesc;
+    const alert = await this._alertCtrl.create({
+      header: "Parabéns",
+      message: 'Você ganhou 10% de desconto. O valor da sua compra agora é: R$'+ valorFinal.toFixed(2),
+      buttons: [{ text: 'Ok!' }]
+    });
+
+    await alert.present();
+  }
+
+  async desconto20(cupomDesc, valor_total, dezPorCento) {
+    var valorFinal = valor_total + dezPorCento - cupomDesc;
+    const alert = await this._alertCtrl.create({
+      header: "Parabéns",
+      message: 'Você ganhou 20% de desconto. O valor da sua compra agora é: R$'+ valorFinal.toFixed(2),
       buttons: [{ text: 'Ok!' }]
     });
 

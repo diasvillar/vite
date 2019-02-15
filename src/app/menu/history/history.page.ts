@@ -19,6 +19,7 @@ export class HistoryPage implements OnInit {
 	checkStatus: boolean = true;
 	public day = new Array();
 	public month = new Array();
+	public loading: any;
 	
 	constructor(
 		private modalCtrl: ModalController,
@@ -30,6 +31,8 @@ export class HistoryPage implements OnInit {
 	) { }
 	
 	async ngOnInit() {
+
+		await this.presentLoading();
 		
 		if(sessionStorage.getItem('flagLogado')!= "sim"){
 			this.goToLogin();
@@ -83,8 +86,15 @@ export class HistoryPage implements OnInit {
 					this.presentFailAlert();
 				});
 		}
-
+		await this.loading.dismiss();
 	}
+
+	async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
+  }
 
 	async presentFailAlert() {
 		const alert = await this._alertCtrl.create({

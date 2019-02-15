@@ -26,6 +26,8 @@ export class HomePage implements OnInit {
 	) { }
 	
 	async ngOnInit() {
+
+		await this.presentLoading();
 		if(sessionStorage.getItem('flagLogado')!= "sim"){
 			this.goToLogin();
 		}
@@ -42,7 +44,16 @@ export class HomePage implements OnInit {
 					this.presentFailAlert();
 				});
 		}
+
+		await this.loading.dismiss();
 	}
+
+	async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
+  }
 
 	openRestaurant(r : any) {
 		this.router.navigate['/restaurant'];

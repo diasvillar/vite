@@ -2,7 +2,7 @@
 	<ion-toolbar transparent>
 		<ion-title>Histórico de Pedidos</ion-title>
 		<ion-buttons slot="start">
-			<ion-back-button defaultHref="/tabs/(menu:menu)"></ion-back-button>
+			<ion-back-button href="/tabs/(menu:menu)"></ion-back-button>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
@@ -16,13 +16,15 @@
 					<span>{{month[i]}}</span>
 				</div>
 				<div class="history-content">
-					<div class="title">Octavio Café - Eldorado</div>
+					<div class="title" *ngIf="cart.cardapio_id == 1">Octavio Café - Faria Lima</div>
+					<div class="title" *ngIf="cart.cardapio_id == 2">Octavio Café - Cidade Jardim</div>
+					<div class="title" *ngIf="cart.cardapio_id == 3">Octavio Café - Eldorado</div>
 					<div *ngFor='let pedido of cart.pedidos'>
 						<div class="item" *ngIf="pedido.cardapio != null">{{pedido.quantidade}}x {{pedido.cardapio.nome}}</div>
 						<div class="item" *ngIf="pedido.cardapio == null">{{pedido.quantidade}}x {{pedido.cardapioGeral.nome}}</div>
 					</div>
 					<div class="value">Valor total</div>
-					<div class="price">R${{cart.valor_total + cart.dezPorCento}}</div>
+					<div class="price">R${{cart.valor_total + cart.dezPorCento - cart.cupomDesc}}</div>
 				</div>
 			</div>
 		</ion-item>

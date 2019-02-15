@@ -56,12 +56,22 @@
 								<ion-item no-padding>
 									<ion-radio slot="start" color="success" name="dez" value="Não"></ion-radio>
 									<ion-label>Não</ion-label>
-									<ion-note *ngIf="dezPorCento == 'Sim'" slot="end" class="price">R${{cart.valor_total + cart.valor_total*0.1}}</ion-note>
+									<ion-note *ngIf="dezPorCento == 'Sim'" slot="end" class="price">R${{cart.valor_total + cart.valor_total*0.10}}</ion-note>
 									<ion-note *ngIf="dezPorCento != 'Sim'" slot="end" class="price">R${{cart.valor_total}}</ion-note>
 								</ion-item>
 							</ion-radio-group>
 					</ion-list>
 				</div>
+
+				<div>
+					<p class="item-sub-title"><b>Você possui algum cupom de desconto?</b></p>
+					<ion-list class="list-toppings" lines="none" >
+						<ion-item no-padding>
+							<ion-input placeholder="Cupom de Desconto" [(ngModel)]="cupomDesc" name="card_number"></ion-input> <!---->
+						</ion-item>
+					</ion-list>
+				</div>
+				
 
 				<div *ngIf="cart.pedidos != null">
 					<p class="item-sub-title"><b>Como será o consumo?</b></p>
@@ -98,7 +108,7 @@
 		</div>
 		<div class="footer-buttons">
 			<ion-button (click)="seleciona(restaurante)" color="medium">Continuar Pedindo</ion-button>
-			<ion-button (click)="checkout()" color="primary">Finalizar Pedido</ion-button>
+			<ion-button (click)="verificaFinal()" color="primary">Finalizar Pedido</ion-button>
 		</div>
 	</div>
 </ion-content>

@@ -12,7 +12,7 @@
 			</ion-anchor>
 		</div>
 		<div class="page-sub-header">{{restaurante.endereco}}</div>
-		<ion-input placeholder="Buscar"></ion-input>
+		<!--<ion-input placeholder="Buscar"></ion-input>-->
 		<div class="categories">
 			<ion-segment ([ngModel])="segment">
 				<ion-segment-button value="Bebidas" (click)="selectedBebidas()">
@@ -21,7 +21,7 @@
 				<ion-segment-button value="Cafés" (click)="selectedCafes()">
 					Cafés
 				</ion-segment-button>
-				<ion-segment-button *ngIf="restaurante.id == 1"  value="Cafés Da Manhã" (click)="selectedCafesDaManha()">
+				<ion-segment-button *ngIf="restaurante.id == '1'"  value="Cafés Da Manhã" (click)="selectedCafesDaManha()">
 					Cafés Da Manhã
 				</ion-segment-button>
 				<ion-segment-button value="Chás" (click)="selectedChas()">
@@ -39,7 +39,7 @@
 				<ion-segment-button value="Espressos" (click)="selectedEspressos()">
 					Espressos
 				</ion-segment-button>
-				<ion-segment-button *ngIf="restaurante.id == 1" value="Petiscos" (click)="selectedPetiscos()">
+				<ion-segment-button *ngIf="restaurante.id == '1'" value="Petiscos" (click)="selectedPetiscos()">
 					Petiscos
 				</ion-segment-button>
 				<ion-segment-button value="Pratos" (click)="selectedPratos()">

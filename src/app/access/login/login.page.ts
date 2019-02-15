@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { Http } from '@angular/http';
 import { Usuario} from '../../../domain/usuario/usuario';
 
@@ -14,20 +14,23 @@ export class LoginPage implements OnInit {
   public http;
   public usuario: Usuario;
   public usuarioLogado: Usuario;
+  public loading: any;
 
-  constructor(public navCtrl: NavController, public _alertCtrl: AlertController, http: Http) { 
+  constructor(public navCtrl: NavController, public _alertCtrl: AlertController, private _loadingCtrl: LoadingController, http: Http) { 
 
     this.data={};
     this.data.response = '';
     this.http = http;
     this.usuario = new Usuario (null, null,  null, null, null);
+    
 
   }
 
   ngOnInit() {
   }
 
-  submit(){
+  async submit(){
+    await this.presentLoading();
     var link = 'https://viniciusvillar.000webhostapp.com/vite/page/login_ionic';
     var data = JSON.stringify({email: this.usuario.email, password: this.usuario.password});
 
@@ -60,7 +63,14 @@ export class LoginPage implements OnInit {
       console.log("Ocorreu algum erro!");
 
     });
-
+    await this.loading.dismiss();
+  }
+  
+  async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
   }
 
   async presentFailAlert() {

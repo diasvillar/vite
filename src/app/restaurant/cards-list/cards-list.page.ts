@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController, Radio } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 
@@ -9,7 +9,6 @@ import { Cpagamento } from '../../../domain/cpagamento/cpagamento';
 
 
 import * as $ from "jquery";
-import { TouchSequence } from 'selenium-webdriver';
 
 
 @Component({
@@ -21,12 +20,14 @@ export class CardsListPage implements OnInit {
 
   public restaurante: Restaurante;
   public cPagamentos: Cpagamento[];
-  public radioData: number;
+  public radioData: number = null;
+  public loading: any;
 
   constructor(
     public navCtrl: NavController,
     private route: ActivatedRoute,
     public _alertCtrl: AlertController,
+    private _loadingCtrl: LoadingController,
     private router: Router,
     private _http: Http
   ) { 
@@ -44,6 +45,10 @@ export class CardsListPage implements OnInit {
   }
 
   async ngOnInit() {
+
+    await this.presentLoading();
+
+    console.log("radioData: " + this.radioData + "\n\n");
 
     if(sessionStorage.getItem('flagLogado')!= "sim"){
       this.goToLogin();
@@ -65,6 +70,14 @@ export class CardsListPage implements OnInit {
 				  console.log(err);
 			  });
 
+    await this.loading.dismiss();
+  }
+
+  async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
   }
 
   clearCart(){
@@ -161,7 +174,9 @@ export class CardsListPage implements OnInit {
 		//this.navCtrl.('/restaurant', { restauranteSelecionado: restaurante });
   }
 
-  submit(){
+  async submit(){
+
+    await this.presentLoading();
 
     /* let loader = this._loadingCtrl.create({
        content: 'Realizando pagamento. Por favor, aguarde ...'
@@ -218,10 +233,11 @@ export class CardsListPage implements OnInit {
      var confUrl;
      var confirmation;
 
+
     
      //GET USER BY EMAIL ################################################################
      console.log("COMECANDO A BUSCA PELO CLIENTE NA VINDI: " + nameUser + ", " + emailUser  + "\n\n\n");
-     $.ajax({
+     await $.ajax({
        method: "POST",
        async: false,
        url: "https://viniciusvillar.000webhostapp.com/phpServerApiVindi/getUserApiVindi.php",
@@ -353,6 +369,7 @@ export class CardsListPage implements OnInit {
 
                bill_items.push(new Object({product_id: 16329, amount: acrescimoFinalVindi}));
                bill_items.push(new Object({product_id: 16330, amount: this.cart.dezPorCento}));
+               bill_items.push(new Object({product_id: 16810, amount: (-this.cart.cupomDesc)}));
               
                dataPostBill = JSON.stringify({customer_id: customer_id, payment_method_code: payment_method_code, bill_items: bill_items , holder_name: holder_name, card_expiration: card_expiration, card_number: card_number, card_cvv: card_cvv, payment_company_code: payment_company_code});
                console.log(dataPostBill);
@@ -542,6 +559,17 @@ export class CardsListPage implements OnInit {
                        bill_items.push(new Object({product_id: bill_itemsID[y], amount: bill_itemsAmout[y]}));
 
                      }
+
+                     this.cart = JSON.parse(sessionStorage.getItem('cart'));
+               
+                     var acrescimoFinalVindi = 0;
+                     for(var acr = 0; acr<this.cart.pedidos.length; acr++){
+                         acrescimoFinalVindi += parseInt(this.cart.pedidos[acr]["acrescimoTotal"]);
+                     }
+
+                     bill_items.push(new Object({product_id: 16329, amount: acrescimoFinalVindi}));
+                     bill_items.push(new Object({product_id: 16330, amount: this.cart.dezPorCento}));
+                     bill_items.push(new Object({product_id: 16810, amount: (-this.cart.cupomDesc)}));
                      
                      dataPostBill = JSON.stringify({customer_id: customer_id, payment_method_code: payment_method_code, bill_items: bill_items , holder_name: holder_name, card_expiration: card_expiration, card_number: card_number, card_cvv: card_cvv, payment_company_code: payment_company_code});
                      console.log(dataPostBill);
@@ -617,21 +645,64 @@ export class CardsListPage implements OnInit {
          //loader.dismiss();
          if(confirmation == true){
 
-           //this.presentSucesso();
+            //atualizar cupom aqui
+            var cartCupom = JSON.parse(sessionStorage.getItem('cart'));
+            //console.log("cartCupomLENGTH: " + JSON.stringify(cartCupom) + "\n\n");
+            if(cartCupom != null){ 
 
-           this.clearCart();
+              if(cartCupom.cupomDesc != 0){
+                if(cartCupom.cupomDesc == parseFloat((cartCupom.valor_total*0.10).toFixed(2))){
+                  console.log("cupom de 10 \n\n");
 
-           this.goToConfirmation(this.restaurante);
+                  await this._http
+                    .get('https://viniciusvillar.000webhostapp.com/vite/page/update_cupon1/'+ idUser)
+                    .pipe(map(res => res.json()))
+                    .toPromise()
+                    .then( response => {
+
+                      console.log("Cupom 1 atualizado\n");
+                    
+                    } )
+                    .catch(err => {
+                      console.log(err);
+                    });
+                }
+                else{
+                  console.log("cupom de 20 \n\n");
+
+                  await this._http
+                    .get('https://viniciusvillar.000webhostapp.com/vite/page/update_cupon2/'+ idUser)
+                    .pipe(map(res => res.json()))
+                    .toPromise()
+                    .then( response => {
+
+                      console.log("Cupom 2 atualizado\n");
+                    
+                    } )
+                    .catch(err => {
+                      console.log(err);
+                    });
+                }
+
+              }
+              
+            }
+           
+           
+          this.clearCart();
+          await this.loading.dismiss();
+
+          this.goToConfirmation(this.restaurante);
 
          }
          else{
+          await this.loading.dismiss();
 
            //this.presentFailAlert();
 
            this.goToFail(this.restaurante);
 
          }
-
 
  }
 

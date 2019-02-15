@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 
 import { Restaurante } from '../../../domain/restaurante/restaurante';
 import { Cart } from '../../../domain/cart/cart';
@@ -13,13 +13,15 @@ import { Cart } from '../../../domain/cart/cart';
 export class OrderCartPage implements OnInit {
 
   public restaurante: Restaurante;
-  public cart: Cart;
+	public cart: Cart;
+	public loading: any;
 
   constructor(    
 
       private route: ActivatedRoute,
       private router: Router,
-      public navCtrl: NavController,
+			public navCtrl: NavController,
+			private _loadingCtrl: LoadingController,
       public _alertCtrl: AlertController
     
     ) {
@@ -33,10 +35,12 @@ export class OrderCartPage implements OnInit {
         this.restaurante.imgtopo = params["imgtopo"];
         this.restaurante.endereco = params["endereco"];      
       });
-      this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
+      this.cart = new Cart(null,null,null,null,null,null,null,null,null,null,null,null);
     }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+		await this.presentLoading();
 
     console.log(sessionStorage.getItem('usuarioId'));
     console.log(sessionStorage.getItem('usuarioName'));
@@ -52,8 +56,17 @@ export class OrderCartPage implements OnInit {
     }
     else{
       console.log("Carrinho vazio");
-    } 
+		} 
+		
+		await this.loading.dismiss();
 
+	}
+	
+	async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
   }
 
   goToLogin(){

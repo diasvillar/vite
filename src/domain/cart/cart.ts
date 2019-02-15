@@ -12,6 +12,8 @@ export class Cart{
         public metodo: string,
         public retirada: string,
         public horario: string,
-        public dezPorCento: number
+        public dezPorCento: number,
+        public cupomDesc: number,
+        public cardapio_id: number
     ){}
 }

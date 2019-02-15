@@ -15,7 +15,7 @@ export class TabsPage {
   async presentFailAlert() {
     const alert = await this._alertCtrl.create({
       header: "Ops",
-      message: 'Estamos trabalhando nesse exato momento para tornar essa busca possível!. Agradecemos a compreensão.',
+      message: '<p>Estamos trabalhando nesse exato momento para deixar a Vite mais completa para você!</p> <p>Agradecemos a compreensão.</p>',
       buttons: [{ text: 'Ok!' }]
     });
 

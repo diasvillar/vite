@@ -64,7 +64,7 @@ export class RestaurantPage implements OnInit {
 			this.goToLogin();
 		}
 		
-		this.presentLoading();
+		await this.presentLoading();
 	  
 		await this._http
 			  .get(this.urlCategoria)
@@ -125,7 +125,7 @@ export class RestaurantPage implements OnInit {
 			  .catch(err => {
 				 console.log(err);
 				 if (this.loading != undefined)
-				 	this.loading.dismiss();
+				 	this.loading.dismiss();this.loading.dismiss();
 				 this.presentFailAlert();
 				 this.close();
 			  });

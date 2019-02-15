@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 
 import { Restaurante } from '../../../domain/restaurante/restaurante';
 import { CardapioCafe } from '../../../domain/cardapioCafe/cardapioCafe';
@@ -22,6 +22,7 @@ export class ItemPage implements OnInit {
   public cart: Cart;
   public pedidos: Pedido[] = [];
   public content : Boolean;
+  public loading: any;
 
   public radioData: string;
   imagem: string;
@@ -52,6 +53,7 @@ export class ItemPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public navCtrl: NavController,
+    private _loadingCtrl: LoadingController,
     public _alertCtrl: AlertController,
     //http: Http, 
     ) { 
@@ -117,14 +119,16 @@ export class ItemPage implements OnInit {
                                                                 this.radioData = "Salada";
                                                                     }else if(this.cardapioGeral.nome === "Bruschetta" ){
                                                                       this.radioData = "Napolitana";
-                                                                          }else{
-                                                                            this.radioData = "";
-                                                                          }
+                                                                          }else if(this.cardapioGeral.nome === "Tapioca"){
+                                                                            this.radioData = "Queijo Minas Frescal e Tomate";
+                                                                            }else{
+                                                                              this.radioData = "";
+                                                                            }
       }
     });
     //this.radioData = "Coca-Cola";
     this.pedido = new Pedido(null,null,null,null,null,null);
-    this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
+    this.cart = new Cart(null,null,null,null,null,null,null,null,null,null,null,null);
     this.cart.id = this.restaurante.id;
     this.pedido.cardapio = this.cardapioCafe;
     this.pedido.cardapioGeral = this.cardapioGeral;
@@ -134,7 +138,9 @@ export class ItemPage implements OnInit {
        
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    await this.presentLoading();
 
     if(sessionStorage.getItem('flagLogado')!="sim"){
       this.goToLogin();
@@ -147,7 +153,17 @@ export class ItemPage implements OnInit {
       this.content = false;
      // this.radioData = null;
     }
+
+    await this.loading.dismiss();
   }
+
+  async presentLoading() {
+		this.loading = await this._loadingCtrl.create({
+		   message: 'Carregando ...'
+		});
+		return await this.loading.present();
+  }
+  
 
   goToLogin(){
     this.navCtrl.navigateRoot('/login');
@@ -196,7 +212,7 @@ export class ItemPage implements OnInit {
 
       if(!this.pedidos){
         console.log("Entrou no If 0")
-        this.cart = new Cart(null,null,null,null,null,null,null,null,null,null);
+        this.cart = new Cart(null,null,null,null,null,null,null,null,null,null,null,null);
       }
     }
     else{
