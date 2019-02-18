@@ -252,7 +252,7 @@ export class CardsListPage implements OnInit {
            customer_id = jsonDataUser.customers[0].id;
            
            jsonDataUser.customers.forEach(element => {
-             if(emailUser == element.email){
+             if(emailUser == element.email && element.id == customer_id){
                console.log(element.email + " Achei o Usuário, então preciso buscar produtos pra saber se já estão cadastrados\n");
 
                this.cart = JSON.parse(sessionStorage.getItem('cart'));

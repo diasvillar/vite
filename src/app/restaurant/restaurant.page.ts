@@ -53,7 +53,8 @@ export class RestaurantPage implements OnInit {
 		this.urlCategoria = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_categorias_cardapio/";
 		this.url = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_cafe_json/"+this.restaurante.id;
 		this.urlGeral = "https://viniciusvillar.000webhostapp.com/vite/page/get_ionic_cardapio_geral_json/"+this.restaurante.id;
-		this.urlIndisponivel = "https://viniciusvillar.000webhostapp.com/vite/restaurante/get_cardapio_indisponivel_novo_2/"+this.restaurante.id;
+		this.urlIndisponivel = "https://viniciusvillar.000webhostapp.com/vite/restaurante/get_cardapio_indisponivel_novo/"+this.restaurante.id;
+		//this.urlIndisponivel = "https://viniciusvillar.000webhostapp.com/vite/restaurante/get_cardapio_indisponivel";
 		this.segment = "Cafés";
 		
 	}
@@ -300,8 +301,9 @@ export class RestaurantPage implements OnInit {
 		for(var x = 0; x < this.indisponiveis.length; x++){
 			if(this.indisponiveis[x].categoria == segment){
 				for(var y = 0; y < this.indisponiveis[x].items.length; y++){
-					if(id == this.indisponiveis[x].items[y].id)
+					if(id == this.indisponiveis[x].items[y].id){
 						return true;
+					}
 				}
 			}
 		}

@@ -124,7 +124,7 @@
 				</ion-list>
 			</div>
 
-			<div *ngIf="segment === 'Pratos' && (cardapioGeral.categoria === 'Prato' || cardapioGeral.categoria === 'Salada')">
+			<div *ngIf="(segment === 'Pratos' && (cardapioGeral.categoria === 'Prato' || cardapioGeral.categoria === 'Salada')) && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -140,7 +140,7 @@
 				</ion-list>
 			</div>
 
-			<div *ngIf="segment === 'Petiscos' && cardapioGeral.categoria === 'Petiscos'">
+			<div *ngIf="(segment === 'Petiscos' && cardapioGeral.categoria === 'Petiscos') && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -156,7 +156,7 @@
 				</ion-list>
 			</div>
 
-			<div *ngIf="segment === 'Espressos' && (cardapioGeral.categoria === 'Espresso' || cardapioGeral.categoria === 'Bebida com Espresso')">
+			<div *ngIf="(segment === 'Espressos' && (cardapioGeral.categoria === 'Espresso' || cardapioGeral.categoria === 'Bebida com Espresso')) && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -172,7 +172,7 @@
 				</ion-list>
 			</div>
 
-			<div *ngIf="segment === 'Doces' && (cardapioGeral.categoria === 'Doce' || cardapioGeral.categoria === 'Bolo')">
+			<div *ngIf="(segment === 'Doces' && (cardapioGeral.categoria === 'Doce' || cardapioGeral.categoria === 'Bolo')) && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -188,7 +188,7 @@
 				</ion-list>
 			</div>
 
-			<div *ngIf="segment === 'Coquetéis' && (cardapioGeral.categoria === 'Coquetel' || cardapioGeral.categoria === 'Drinque Octavio' || cardapioGeral.categoria === 'Dose')">
+			<div *ngIf="(segment === 'Coquetéis' && (cardapioGeral.categoria === 'Coquetel' || cardapioGeral.categoria === 'Drinque Octavio' || cardapioGeral.categoria === 'Dose')) && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -204,7 +204,7 @@
 				</ion-list>
 			</div>
 
-			<div *ngIf="segment === 'Chocolates' && cardapioGeral.categoria === 'Chocolates'">
+			<div *ngIf="(segment === 'Chocolates' && cardapioGeral.categoria === 'Chocolates') && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -220,7 +220,7 @@
 				</ion-list>
 			</div>
 
-			<div *ngIf="segment === 'Chás' && cardapioGeral.categoria === 'Chás'">
+			<div *ngIf="(segment === 'Chás' && cardapioGeral.categoria === 'Chás') && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -236,7 +236,7 @@
 				</ion-list>
 			</div>
 	
-			<div *ngIf="segment === 'Cafés Da Manhã' && cardapioGeral.categoria === 'Cafés Da Manhã'">
+			<div *ngIf="(segment === 'Cafés Da Manhã' && cardapioGeral.categoria === 'Cafés Da Manhã') && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 						<div class="info" >
@@ -253,7 +253,7 @@
 			</div>
 
 			<div *ngIf="restaurante.id == 1">
-				<div *ngIf="segment === 'Bebidas' && (cardapioGeral.categoria === 'Bebida' || cardapioGeral.categoria === 'Cerveja' || cardapioGeral.categoria === 'Suco')">
+				<div *ngIf="(segment === 'Bebidas' && (cardapioGeral.categoria === 'Bebida' || cardapioGeral.categoria === 'Cerveja' || cardapioGeral.categoria === 'Suco')) && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 					<ion-list class="item-list" lines="none">
 						<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 							<div class="info" >
@@ -271,7 +271,7 @@
 			</div>
 
 			<div *ngIf="restaurante.id != 1">
-				<div *ngIf="segment === 'Bebidas' && (cardapioGeral.categoria === 'Bebida' || cardapioGeral.categoria === 'Cerveja' || cardapioGeral.categoria === 'Suco' || cardapioGeral.categoria === 'Suco D-Tox')">
+				<div *ngIf="(segment === 'Bebidas' && (cardapioGeral.categoria === 'Bebida' || cardapioGeral.categoria === 'Cerveja' || cardapioGeral.categoria === 'Suco' || cardapioGeral.categoria === 'Suco D-Tox')) && !estaIndisp(cardapioGeral.id, cardapioGeral.categoria)">
 					<ion-list class="item-list" lines="none">
 						<ion-item button no-padding (click)="selecionaGeral(cardapioGeral, restaurante)">
 							<div class="info" >
@@ -291,7 +291,7 @@
 		</div>
 
 		<div *ngFor="let cardapioCafe of cardapiosCafe">
-			<div *ngIf="segment === 'Cafés'">
+			<div *ngIf="(segment === 'Cafés') && !estaIndisp(cardapioCafe.id, cardapioCafe.categoria_superior)">
 				<ion-list class="item-list" lines="none">
 					<ion-item button no-padding (click)="selecionaCafe(cardapioCafe, restaurante)">
 						<div class="info" >
