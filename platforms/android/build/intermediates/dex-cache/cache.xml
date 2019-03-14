@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Desenvolvimento\ionic\FrontEnd-ViteV2\platforms\android\app\build\intermediates\transforms\desugar\release\0.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="28.0.0"
+        sha1="9a89d8984d104516fb45a31f7d647ce381625033">
+        <dex dex="C:\Desenvolvimento\ionic\FrontEnd-ViteV2\platforms\android\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Desenvolvimento\ionic\FrontEnd-ViteV2\platforms\android\app\build\intermediates\transforms\desugar\release\2.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="28.0.0"
+        sha1="00bd536bdc2768828c4abfae96d68f54ff6aef72">
+        <dex dex="C:\Desenvolvimento\ionic\FrontEnd-ViteV2\platforms\android\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+
+</items>
