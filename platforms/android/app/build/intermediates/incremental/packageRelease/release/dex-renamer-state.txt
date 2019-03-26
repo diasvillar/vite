@@ -1,4 +1,4 @@
-#Thu Mar 14 12:02:04 BRT 2019
+#Tue Mar 26 13:31:59 BRT 2019
 base.0=C\:\\Desenvolvimento\\ionic\\FrontEnd-ViteV2\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0
 path.0=classes.dex
 renamed.0=classes.dex

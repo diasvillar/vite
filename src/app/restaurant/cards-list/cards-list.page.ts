@@ -367,9 +367,9 @@ export class CardsListPage implements OnInit {
                   acrescimoFinalVindi += parseInt(this.cart.pedidos[acr]["acrescimoTotal"]);
                }
 
-               bill_items.push(new Object({product_id: 16329, amount: acrescimoFinalVindi}));
-               bill_items.push(new Object({product_id: 16330, amount: this.cart.dezPorCento}));
-               bill_items.push(new Object({product_id: 16810, amount: (-this.cart.cupomDesc)}));
+               bill_items.push(new Object({product_id: 426078, amount: acrescimoFinalVindi}));
+               bill_items.push(new Object({product_id: 426077, amount: this.cart.dezPorCento}));
+               bill_items.push(new Object({product_id: 426080, amount: (-this.cart.cupomDesc)}));
               
                dataPostBill = JSON.stringify({customer_id: customer_id, payment_method_code: payment_method_code, bill_items: bill_items , holder_name: holder_name, card_expiration: card_expiration, card_number: card_number, card_cvv: card_cvv, payment_company_code: payment_company_code});
                console.log(dataPostBill);
@@ -567,9 +567,9 @@ export class CardsListPage implements OnInit {
                          acrescimoFinalVindi += parseInt(this.cart.pedidos[acr]["acrescimoTotal"]);
                      }
 
-                     bill_items.push(new Object({product_id: 16329, amount: acrescimoFinalVindi}));
-                     bill_items.push(new Object({product_id: 16330, amount: this.cart.dezPorCento}));
-                     bill_items.push(new Object({product_id: 16810, amount: (-this.cart.cupomDesc)}));
+                     bill_items.push(new Object({product_id: 426078, amount: acrescimoFinalVindi}));
+                     bill_items.push(new Object({product_id: 426077, amount: this.cart.dezPorCento}));
+                     bill_items.push(new Object({product_id: 426080, amount: (-this.cart.cupomDesc)}));
                      
                      dataPostBill = JSON.stringify({customer_id: customer_id, payment_method_code: payment_method_code, bill_items: bill_items , holder_name: holder_name, card_expiration: card_expiration, card_number: card_number, card_cvv: card_cvv, payment_company_code: payment_company_code});
                      console.log(dataPostBill);
